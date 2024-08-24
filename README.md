@@ -5,7 +5,15 @@ Written Instructions:
 3. Create a new dashboard in HomeAssistant and paste the code from the raw view file into the Raw Configuration Editor.
 
 !! You will also need to create an input boolean called vis_alt to control the visibility of some cards, allowing them to show or hide depending on the state of this boolean.
-   
+
+Hacs:
+- https://github.com/piitaya/lovelace-mushroom
+- https://github.com/custom-cards/button-card
+- https://github.com/thomasloven/lovelace-card-mod
+- https://github.com/ofekashery/vertical-stack-in-card
+- https://github.com/custom-cards/stack-in-card
+- https://github.com/bramkragten/swipe-card
+
 What is HaHome?
 HaHome is a dashboard design for HomeAssistant, inspired by HomeKit and Google Home. It was created by Sebastian.
 
