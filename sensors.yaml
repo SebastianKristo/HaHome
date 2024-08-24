@@ -1,0 +1,27 @@
+sensor:
+- platform: template
+  sensors:
+    greeting:
+      friendly_name: "Greeting"
+      value_template: >
+        {% set current_hour = now().hour %}
+        {% if current_hour >= 6 and current_hour < 9 %}
+          God morgen Sebastian
+        {% elif current_hour >= 9 and current_hour < 12 %}
+          God formiddag Sebastian
+        {% elif current_hour >= 12 and current_hour < 18 %}
+          God ettermiddag Sebastian 
+        {% elif current_hour >= 18 and current_hour < 24 %}
+          God kveld Sebastian
+        {% else %}
+          God natt Sebastian
+        {% endif %}
+    current_lights_off:
+      friendly_name: Lights on and off
+      unit_of_measurement: "on"
+      value_template: >
+        {% set total = 0 %}
+        {% if is_state('light.gronn_sofalampe_gronn_sofalampe_turned_on', 'on') %}
+          {% set total = total + 1 %}
+        {% endif %}
+        {{total}}
