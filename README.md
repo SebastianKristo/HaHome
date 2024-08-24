@@ -1,4 +1,4 @@
-Written Instructions:
+# Written Instructions:
 
 1. Copy the code from sensors.yaml and paste it into your HomeAssistant configuration.yaml file.
 2. Place the two themes from the themes folder in this repository into the themes folder of your HomeAssistant instance.
@@ -14,7 +14,7 @@ Hacs:
 - https://github.com/custom-cards/stack-in-card
 - https://github.com/bramkragten/swipe-card
 
-What is HaHome?
+# What is HaHome?
 HaHome is a dashboard design for HomeAssistant, inspired by HomeKit and Google Home. It was created by Sebastian.
 
 ![Alt text](IMG_0277-left.png)
