@@ -1,0 +1,2028 @@
+title: Home
+path: homekit
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /config
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:menu
+        entity: sensor.pc_soverom_temperature
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: spacer
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /config
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:plus
+        entity: sensor.pc_soverom_temperature
+      - type: custom:button-card
+        tap_action:
+          action: assist
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:message-processing-outline
+        entity: sensor.pc_soverom_temperature
+      - type: custom:button-card
+        tap_action:
+          action: toggle
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '0' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:dots-vertical
+        entity: input_boolean.themes_homekit
+  - type: custom:button-card
+    tap_action:
+      action: none
+    show_icon: false
+    show_label: true
+    show_name: true
+    styles:
+      card:
+        - background-color: rgba(0,0,0,0)
+        - box-shadow: none
+        - height: auto
+        - width: auto
+        - margin-top: 6px
+        - margin-left: 6px
+        - margin-bottom: 0px
+        - padding: 2px
+      grid:
+        - grid-template-areas: "'n' 'l'"
+        - grid-template-columns: 1fr
+        - grid-template-rows: min-content min-content
+      name:
+        - justify-self: start
+        - font-weight: 400
+        - font-size: 2.5rem
+      label:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 1rem
+        - opacity: "0.4"
+    name: |
+      [[[ 
+        return (entity.state)  
+      ]]]
+    entity: sensor.greeting
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: null
+        styles:
+          grid:
+            - grid-template-columns: 40px 1fr
+            - grid-template-rows: min-content min-content
+            - grid-template-areas: "\"i n\" \"i l\""
+          card:
+            - padding: 4px
+            - margin-left: 1px
+          img_cell:
+            - justify-self: start
+            - width: 30px
+            - height: 30px
+            - margin-left: "-3px"
+          icon:
+            - width: 22px
+            - color: "#FF9843"
+          name:
+            - justify-self: start
+            - font-size: 14px
+            - opacity: "0.7"
+            - font-weight: 500
+            - padding: 2px 0
+          label:
+            - justify-self: start
+            - font-size: 16px
+            - padding: 2px 0
+        name: Climate
+        entity: sensor.hus_tempraturee
+        icon: mdi:thermometer
+        tap_action:
+          action: navigate
+          navigation_path: /ui-minimalist/homekit-klima
+        label: |
+          [[[ 
+            return (entity.state)  + '°C' 
+          ]]]
+        show_label: true
+      - type: custom:button-card
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: null
+        styles:
+          grid:
+            - grid-template-columns: 40px 1fr
+            - grid-template-rows: min-content min-content
+            - grid-template-areas: "\"i n\" \"i l\""
+          card:
+            - padding: 4px
+            - margin-left: 1px
+          img_cell:
+            - justify-self: start
+            - width: 30px
+            - height: 30px
+            - margin-left: "-3px"
+          icon:
+            - width: 22px
+            - color: "#FFDD95"
+          name:
+            - justify-self: start
+            - font-size: 14px
+            - font-weight: 500
+            - opacity: "0.7"
+            - padding: 2px 0
+          label:
+            - justify-self: start
+            - font-size: 16px
+            - padding: 2px 0
+        name: Lights
+        entity: sensor.current_lights_off
+        icon: mdi:lightbulb
+        tap_action:
+          action: navigate
+          navigation_path: /ui-minimalist/homekit-lys
+        label: |
+          [[[ 
+            return (entity.state)  + ' på' 
+          ]]]
+        show_label: true
+      - type: custom:button-card
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: null
+        styles:
+          grid:
+            - grid-template-columns: 40px 1fr
+            - grid-template-rows: min-content min-content
+            - grid-template-areas: "\"i n\" \"i l\""
+          card:
+            - padding: 4px
+            - margin-left: 1px
+          img_cell:
+            - justify-self: start
+            - width: 30px
+            - height: 30px
+            - margin-left: "-3px"
+          icon:
+            - width: 22px
+            - color: "#D24545"
+          name:
+            - justify-self: start
+            - font-size: 14px
+            - font-weight: 500
+            - opacity: "0.7"
+            - padding: 2px 0
+          label:
+            - justify-self: start
+            - font-size: 16px
+            - padding: 2px 0
+        name: Sikkerhet
+        entity: lock.dor_las_3
+        icon: mdi:lock
+        tap_action:
+          action: navigate
+          navigation_path: /ui-minimalist/homekit-sikkerhet
+        label: |
+          [[[ 
+            return (entity.state) 
+          ]]]
+        show_label: true
+  - type: custom:button-card
+    template: card_title
+    name: 📽️ Kamera
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: custom:swipe-card
+    cards:
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: custom:vertical-stack-in-card
+            horizontal: false
+            cards:
+              - show_state: false
+                show_name: false
+                camera_view: auto
+                type: picture-entity
+                image: https://demo.home-assistant.io/stub_config/bedroom.png
+                entity: camera.k1c_b387_kamera
+                aspect_ratio: "9:10"
+          - type: custom:vertical-stack-in-card
+            horizontal: false
+            cards:
+              - show_state: false
+                show_name: false
+                camera_view: auto
+                type: picture-entity
+                image: https://demo.home-assistant.io/stub_config/bedroom.png
+                entity: camera.k1c_b387_kamera
+              - show_state: false
+                show_name: false
+                camera_view: auto
+                type: picture-entity
+                image: https://demo.home-assistant.io/stub_config/bedroom.png
+                entity: camera.k1c_b387_kamera
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: custom:vertical-stack-in-card
+            horizontal: false
+            cards:
+              - show_state: false
+                show_name: false
+                camera_view: auto
+                type: picture-entity
+                image: https://demo.home-assistant.io/stub_config/bedroom.png
+                entity: camera.g3_flex_high_resolution_channel
+                aspect_ratio: "9:10"
+          - show_state: false
+            show_name: false
+            camera_view: auto
+            type: picture-entity
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            entity: camera.bedroom
+  - type: custom:button-card
+    template: card_title
+    name: 🚪 Inngang
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: lock.dor_las_3
+            features:
+              - type: lock-commands
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: scale(0.975);
+                  transition: 0s;
+                }
+          - type: vertical-stack
+            cards:
+              - type: tile
+                entity: input_boolean.vis_alt
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+              - type: tile
+                entity: input_select.theme
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.inngang_taklampe
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: scale(0.975);
+                  transition: 0s;
+                }
+          - type: tile
+            entity: light.color_temperature_light_1_4
+            vertical: false
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: scale(0.975);
+                  transition: 0s;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.mellomgang_taklampe
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: scale(0.975);
+                  transition: 0s;
+                }
+          - type: tile
+            entity: switch.trappegang_ovn
+            vertical: false
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: scale(0.975);
+                  transition: 0s;
+                }
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "on"
+        card:
+          type: horizontal-stack
+          cards:
+            - type: tile
+              entity: cover.garasje_apner
+              card_mod:
+                style: |
+                  ha-state-icon {
+                      animation: door 3s steps(1) infinite alternate; 
+                    }
+                    @keyframes door {
+                      0% { clip-path: inset(0 0 0 0); }
+                      25%  { clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 100%, 69% 73%, 32% 73%, 31% 100%, 0 100%); }
+                      50%  { clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 100%, 69% 61%, 32% 61%, 31% 100%, 0 100%); }
+                      75% { clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 100%, 69% 48%, 32% 48%, 31% 100%, 0 100%); }
+                    }
+            - type: tile
+              entity: alarm_control_panel.alarm
+              icon: mdi:dialpad
+              card_mod:
+                style: |
+                  ha-state-icon {
+                    animation: pin 4s infinite;
+                    transform-origin: 50% 75%;
+                  }
+                  @keyframes pin {
+                    0%, 15%, 25%, 35%, 45%, 55% { clip-path: inset(0 0 0 0); }
+                    10% { clip-path: polygon(0% 100%, 1% 23%, 36% 23%, 36% 0%, 100% 0, 100% 100%); } 
+                    20% { clip-path: polygon(0% 100%, 0 0, 62% 0, 61% 25%, 100% 24%, 100% 100%); } 
+                    30% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 25%, 36% 25%, 37% 50%, 63% 49%, 62% 26%, 0 25%); } 
+                    40% { clip-path: polygon(0 51%, 0 0, 100% 0, 100% 100%, 36% 100%, 37% 51%); } 
+                    50% { clip-path: polygon(0 100%, 0 0, 100% 0, 100% 50%, 64% 50%, 64% 100%); } 
+                  } 
+                  .shape {
+                    --shape-animation: ping 4s infinite;
+                  }
+                  @keyframes ping {
+                    55% { box-shadow: 0 0 1px 0px rgba(var(--rgb-blue), 0.3) inset; }
+                    100% { box-shadow: 0 0 5px 15px transparent inset; }
+                  }
+  - type: custom:button-card
+    template: card_title
+    name: 📺 Pult
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.color_temperature_light_1_2
+            features:
+              - type: light-brightness
+          - type: vertical-stack
+            cards:
+              - type: tile
+                entity: light.pult_skjermer_2
+                state_content:
+                  - state
+                  - last-changed
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+              - type: tile
+                entity: light.dimmable_light_1_2
+                state_content:
+                  - state
+                  - last-changed
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.pult_ledstrip
+            state_content:
+              - state
+              - last-changed
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: scale(0.975);
+                  transition: 0s;
+                }
+          - type: tile
+            entity: media_player.pult_2
+            vertical: false
+            name: Pultvifte
+            card_mod:
+              style: |
+                ha-state-icon {
+                  {% if is_state(config.entity, 'on') %}
+                  animation: rotate .5s infinite linear}
+                @keyframes rotate {
+                    0% {
+                      transform: rotate(0deg);
+                    }
+                    100% {
+                      transform: rotate(-359deg);
+                    }
+                  }
+                  {% endif %}
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "on"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: switch.dual_action_switch
+                  name: Pc
+                  icon: phu:rooms-computer
+                  card_mod:
+                    style: |
+                      ha-card:active {
+                        transform: scale(0.975);
+                        transition: 0s;
+                      }
+                - type: tile
+                  entity: media_player.pult_tv
+                  state_content:
+                    - state
+                    - last-changed
+                  hold_action:
+                    action: fire-dom-event
+                    browser_mod:
+                      service: browser_mod.popup
+                      data:
+                        title: Pult Tv
+                        content:
+                          type: custom:firemote-card
+                          entity: media_player.android_tv_192_168_50_134
+                          device_family: chromecast
+                          device_type: chromecast-4k
+                          compatibility_mode: default
+                          apple_tv_remote_entity: remote.stua
+                          app_launch_1: plex
+                          app_launch_2: telia-play
+                          app_launch_3: youtube
+                          app_launch_4: nrk-tv
+                          android_tv_remote_entity: remote.pult_tv
+                          defaultRemoteStyle_override: ""
+                          app_launch_5: ""
+                          scale: "100"
+                          card_mod:
+                            style: |
+                              ha-state-icon {
+                                  animation: tube-on 1s linear, flicker 1s linear 1s infinite alternate;' if is_state(config.entity, 'on') else '--icon-animation: tube-off 2s linear forwards;' }}
+                                }
+                                @keyframes tube-off {
+                                  1%, 15% { transform: scale(1, 0.2); }
+                                  40%  { transform: scale(0.2); opacity: 1; }
+                                  100%  { transform: scale(0.2); opacity: 0; }
+                                }
+                                @keyframes tube-on {
+                                  0% { transform: scale(0.2); opacity: 0; }
+                                  5%  { transform: scale(1, 0.2); opacity: 0.3; }
+                                  15%  { transform: scale(1); opacity: 0.4; }
+                                  100%  { transform: scale(1); opacity: 1; }
+                                }
+                                @keyframes flicker {
+                                  0%, 31.98%, 32.98%, 34.98%, 36.98%, 39.98%, 67.98%, 68.98%, 95.98%, 96.98%, 97.98%, 98.98%, 100% { opacity: 0.6; }
+                                  32%, 33%, 35%, 36%, 37%, 40%, 68%, 69%, 96%, 97%, 98%, 99% { opacity: 1; }
+                                }
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: input_select.radio
+                  state_content:
+                    - state
+                    - last-changed
+                  card_mod:
+                    style: |
+                      {% if is_state('media_player.pult_2', 'playing') %}
+                      ha-state-icon {
+                          animation: beat 1.3s ease-out infinite both;
+                          transform-origin: 50% 80%;
+                        }
+                        @keyframes beat {
+                          0% { transform: scale(1); }
+                          10% { transform: scale(1.1); }
+                          17% { transform: scale(1.05); }
+                          33% { transform: scale(1.25); }
+                          60% { transform: scale(1); }
+                        }
+                      {% endif %}
+                - type: tile
+                  entity: fan.pultvifte_pultvifte_turned_on
+                  state_content:
+                    - state
+                    - last-changed
+                  card_mod:
+                    style: |
+                      {% if is_state('media_player.pult_2', 'playing') %}
+                      ha-state-icon {
+                          animation: beat 1.3s ease-out infinite both;
+                          transform-origin: 50% 80%;
+                        }
+                        @keyframes beat {
+                          0% { transform: scale(1); }
+                          10% { transform: scale(1.1); }
+                          17% { transform: scale(1.05); }
+                          33% { transform: scale(1.25); }
+                          60% { transform: scale(1); }
+                        }
+                      {% endif %}
+  - type: custom:button-card
+    template: card_title
+    name: 🛌 Soverom
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "off"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: climate.living_room
+                  features:
+                    - type: target-temperature
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.color_temperature_light_1_3
+                      vertical: false
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+                    - type: tile
+                      entity: light.on_off_plug_1_5
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+            - type: horizontal-stack
+              cards:
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: switch.pc_hoyttaler_pc_hoyttaler_turned_on
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: scale(0.975);
+                            transition: 0s;
+                          }
+                    - type: tile
+                      entity: light.nattlampe
+                      icon: mdi:music
+                      state_content:
+                        - state
+                        - last-changed
+                      card_mod:
+                        style: |
+                          {% if is_state('media_player.soverom_2', 'playing') %}
+                          ha-state-icon {
+                              animation: beat 1.3s ease-out infinite both;
+                              transform-origin: 50% 80%;
+                            }
+                            @keyframes beat {
+                              0% { transform: scale(1); }
+                              10% { transform: scale(1.1); }
+                              17% { transform: scale(1.05); }
+                              33% { transform: scale(1.25); }
+                              60% { transform: scale(1); }
+                            }
+                          {% endif %}
+                - type: custom:mushroom-vacuum-card
+                  entity: vacuum.sir_sweeps_a_lot_2
+                  icon_animation: true
+                  commands:
+                    - locate
+                    - return_home
+                    - start_pause
+                  fill_container: true
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "on"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: climate.living_room
+                  features:
+                    - type: target-temperature
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.color_temperature_light_1_3
+                      vertical: false
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+                    - type: tile
+                      entity: light.on_off_plug_1_5
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+            - type: horizontal-stack
+              cards:
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: switch.pc_hoyttaler_pc_hoyttaler_turned_on
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: scale(0.975);
+                            transition: 0s;
+                          }
+                    - type: tile
+                      entity: media_player.hoytalere
+                      icon: mdi:music
+                      state_content:
+                        - state
+                        - last-changed
+                      card_mod:
+                        style: |
+                          {% if is_state('media_player.soverom_2', 'playing') %}
+                          ha-state-icon {
+                              animation: beat 1.3s ease-out infinite both;
+                              transform-origin: 50% 80%;
+                            }
+                            @keyframes beat {
+                              0% { transform: scale(1); }
+                              10% { transform: scale(1.1); }
+                              17% { transform: scale(1.05); }
+                              33% { transform: scale(1.25); }
+                              60% { transform: scale(1); }
+                            }
+                          {% endif %}
+                - type: custom:mushroom-vacuum-card
+                  entity: vacuum.sir_sweeps_a_lot_2
+                  icon_animation: true
+                  commands:
+                    - locate
+                    - return_home
+                    - start_pause
+                  fill_container: true
+            - type: horizontal-stack
+              cards:
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.seng_led_strip_seng_led_strip_turned_on
+                      vertical: false
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+                    - type: tile
+                      entity: light.sebastians_taklampe_switch
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.nattlampe
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+                    - type: tile
+                      entity: light.joka_palme_led_strip
+                      card_mod:
+                        style: |
+                          ha-card:active {
+                            transform: translateY(-1.5px);
+                            transition: 0s;
+                            box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                          }
+  - type: custom:button-card
+    template: card_title
+    name: 🛋️ Stue
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "off"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - features:
+                    - type: target-temperature
+                  type: tile
+                  entity: climate.stue_panelovn_stue_panelovn
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.on_off_plug_1_3
+                    - type: tile
+                      entity: light.on_off_plug_2
+            - type: horizontal-stack
+              cards:
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.on_off_plug_2
+                    - type: tile
+                      entity: light.on_off_plug_1
+                - type: tile
+                  entity: light.stue_markise_hoyre_stue_markise_hoyre_2
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: media_player.stua_2
+                  vertical: false
+                  show_entity_picture: true
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.gronn_sofalampe_gronn_sofalampe_turned_on
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "on"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - features:
+                    - type: target-temperature
+                  type: tile
+                  entity: climate.panelovn_stue
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.on_off_plug_1_3
+                    - type: tile
+                      entity: light.on_off_plug_2
+            - type: horizontal-stack
+              cards:
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: climate.oljefyr
+                      state_content:
+                        - state
+                        - last-changed
+                      card_mod:
+                        style: |
+                          mushroom-shape-icon {
+                            {% if is_state(config.entity, 'heat_cool') %}
+                              --card-mod-icon: mdi:autorenew;
+                              animation: spin 3s ease-in-out infinite alternate;
+                            {% elif is_state(config.entity, 'heat') %}
+                              --card-mod-icon: mdi:fire;
+                              animation: heat 2s infinite;
+                            {% elif is_state(config.entity, 'cool') %}
+                              --card-mod-icon: mdi:snowflake;
+                              animation: cool 6s ease-in-out infinite;
+                            {% elif is_state(config.entity, 'dry') %}
+                              --card-mod-icon: mdi:water-percent;
+                              animation: dry 1.5s linear infinite;
+                            {% elif is_state(config.entity, 'fan_only') %}
+                              --card-mod-icon: mdi:fan;
+                              animation: spin 1s linear infinite;
+                            {% else %}
+                              --card-mod-icon: mdi:air-conditioner; 
+                            {% endif %}
+                            display: flex;
+                          }
+                          @keyframes cool {
+                            0%, 100% { transform: rotate(25deg); }
+                            25% { transform: rotate(-25deg); }
+                            50% { transform: rotate(50deg); }
+                            75% { transform: rotate(-50deg); }
+                          }
+                          @keyframes heat {
+                            0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                            10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                            20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                            30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                            40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                            50% { --icon-color: rgba(var(--rgb-red), 0); }
+                          }
+                          @keyframes dry {
+                            0%, 100% { --icon-symbol-size: 21px; }
+                            10%, 90% { --icon-symbol-size: 22px; }
+                            20%, 80% { --icon-symbol-size: 23px; }
+                            30%, 70% { --icon-symbol-size: 24px; }
+                            40%, 60% { --icon-symbol-size: 25px; }
+                            50% { --icon-symbol-size: 26px; }
+                          }
+                    - type: tile
+                      entity: light.on_off_plug_1
+                - type: tile
+                  entity: cover.markise
+                  features:
+                    - type: cover-open-close
+            - type: horizontal-stack
+              cards:
+                - features:
+                    - type: light-brightness
+                  type: tile
+                  entity: light.color_light_1
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.on_off_plug_1_2
+                    - type: tile
+                      entity: light.dimmable_light_1
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: light.gronn_sofalampe_gronn_sofalampe_turned_on
+                  state_content:
+                    - state
+                    - last-changed
+                - type: tile
+                  entity: light.spisebord_spisebord_turned_on
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: media_player.stua_2
+                  state_content:
+                    - state
+                    - last-changed
+                  hold_action:
+                    action: fire-dom-event
+                    browser_mod:
+                      service: browser_mod.popup
+                      data:
+                        title: Apple Tv
+                        content:
+                          type: custom:firemote-card
+                          entity: media_player.stua_2
+                          device_family: apple-tv
+                          device_type: appletv-4k-gen2
+                          compatibility_mode: default
+                          apple_tv_remote_entity: remote.stua
+                          app_launch_1: plex
+                          app_launch_2: telia-play
+                          app_launch_3: youtube
+                          app_launch_4: nrk-tv
+                          scale: "120"
+                  card_mod:
+                    style: |
+                      ha-state-icon {
+                          animation: tube-on 1s linear, flicker 1s linear 1s infinite alternate;' if is_state(config.entity, 'on') else '--icon-animation: tube-off 2s linear forwards;' }}
+                        }
+                        @keyframes tube-off {
+                          1%, 15% { transform: scale(1, 0.2); }
+                          40%  { transform: scale(0.2); opacity: 1; }
+                          100%  { transform: scale(0.2); opacity: 0; }
+                        }
+                        @keyframes tube-on {
+                          0% { transform: scale(0.2); opacity: 0; }
+                          5%  { transform: scale(1, 0.2); opacity: 0.3; }
+                          15%  { transform: scale(1); opacity: 0.4; }
+                          100%  { transform: scale(1); opacity: 1; }
+                        }
+                        @keyframes flicker {
+                          0%, 31.98%, 32.98%, 34.98%, 36.98%, 39.98%, 67.98%, 68.98%, 95.98%, 96.98%, 97.98%, 98.98%, 100% { opacity: 0.6; }
+                          32%, 33%, 35%, 36%, 37%, 40%, 68%, 69%, 96%, 97%, 98%, 99% { opacity: 1; }
+                        }
+                - type: tile
+                  entity: media_player.stua_2
+                  icon: mdi:amplifier
+                  state_content:
+                    - state
+                    - last-changed
+  - type: custom:button-card
+    template: card_title
+    name: 🔪 Kjøkken
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "off"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: climate.bad
+                  features:
+                    - type: target-temperature
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.kjokken_spot
+                      features:
+                        - type: light-brightness
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: light.benkbelysning_benkbelysning
+                - type: tile
+                  entity: light.matbord_matbord_turned_on
+                  state_content:
+                    - state
+                    - last-changed
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "on"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: climate.bad
+                  features:
+                    - type: target-temperature
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.kjokken_spot
+                      features:
+                        - type: light-brightness
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: switch.oslo_kjokken_ovn_socket_1
+                - type: tile
+                  entity: light.extended_color_light_1_2
+                  state_content:
+                    - state
+                    - last-changed
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: light.matbord_matbord_turned_on
+                - type: tile
+                  entity: light.benkbelysning_benkbelysning
+                  state_content:
+                    - state
+                    - last-changed
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: climate.fryseskap_freezer
+                  vertical: true
+                  card_mod:
+                    style: |
+                      mushroom-shape-icon {
+                        {% if is_state(config.entity, 'heat_cool') %}
+                          --card-mod-icon: mdi:autorenew;
+                          animation: spin 3s ease-in-out infinite alternate;
+                        {% elif is_state(config.entity, 'heat') %}
+                          --card-mod-icon: mdi:fire;
+                          animation: heat 2s infinite;
+                        {% elif is_state(config.entity, 'cool') %}
+                          --card-mod-icon: mdi:snowflake;
+                          animation: cool 6s ease-in-out infinite;
+                        {% elif is_state(config.entity, 'dry') %}
+                          --card-mod-icon: mdi:water-percent;
+                          animation: dry 1.5s linear infinite;
+                        {% elif is_state(config.entity, 'fan_only') %}
+                          --card-mod-icon: mdi:fan;
+                          animation: spin 1s linear infinite;
+                        {% else %}
+                          --card-mod-icon: mdi:air-conditioner; 
+                        {% endif %}
+                        display: flex;
+                      }
+                      @keyframes cool {
+                        0%, 100% { transform: rotate(25deg); }
+                        25% { transform: rotate(-25deg); }
+                        50% { transform: rotate(50deg); }
+                        75% { transform: rotate(-50deg); }
+                      }
+                      @keyframes heat {
+                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                        50% { --icon-color: rgba(var(--rgb-red), 0); }
+                      }
+                      @keyframes dry {
+                        0%, 100% { --icon-symbol-size: 21px; }
+                        10%, 90% { --icon-symbol-size: 22px; }
+                        20%, 80% { --icon-symbol-size: 23px; }
+                        30%, 70% { --icon-symbol-size: 24px; }
+                        40%, 60% { --icon-symbol-size: 25px; }
+                        50% { --icon-symbol-size: 26px; }
+                      }
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: switch.vaskemaskin_vaskemaskin_turned_on
+                    - type: tile
+                      entity: switch.oppvaskmaskin_oppvaskmaskin_turned_on
+  - type: custom:button-card
+    template: card_title
+    name: 🗃️ Benk
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: fan.stavifte_stavifte_turned_on
+            vertical: true
+            state_content:
+              - state
+              - last-changed
+            card_mod:
+              style: |
+                ha-state-icon {
+                  {% if is_state(config.entity, 'on') %}
+                  animation: rotate .5s infinite linear}
+                @keyframes rotate {
+                    0% {
+                      transform: rotate(0deg);
+                    }
+                    100% {
+                      transform: rotate(-359deg);
+                    }
+                  }
+                  {% endif %}
+          - type: vertical-stack
+            cards:
+              - type: tile
+                entity: light.benkbelysning
+                state_content:
+                  - state
+                  - last-changed
+              - type: tile
+                entity: switch.server_socket_1
+                state_content:
+                  - state
+                  - last-changed
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.nattbord_lampe
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: translateY(-1.5px);
+                  transition: 0s;
+                  box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                }
+          - type: tile
+            entity: light.homey_ring
+            card_mod:
+              style: |
+                ha-card:active {
+                  transform: translateY(-1.5px);
+                  transition: 0s;
+                  box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                }
+  - type: custom:button-card
+    template: card_title
+    name: 🚽 Bad
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: climate.badgulvvarme_badgulvvarme
+            features:
+              - type: target-temperature
+            card_mod:
+              style: |
+                mushroom-shape-icon {
+                  {% if is_state(config.entity, 'heat_cool') %}
+                    --card-mod-icon: mdi:autorenew;
+                    animation: spin 3s ease-in-out infinite alternate;
+                  {% elif is_state(config.entity, 'heat') %}
+                    --card-mod-icon: mdi:fire;
+                    animation: heat 2s infinite;
+                  {% elif is_state(config.entity, 'cool') %}
+                    --card-mod-icon: mdi:snowflake;
+                    animation: cool 6s ease-in-out infinite;
+                  {% elif is_state(config.entity, 'dry') %}
+                    --card-mod-icon: mdi:water-percent;
+                    animation: dry 1.5s linear infinite;
+                  {% elif is_state(config.entity, 'fan_only') %}
+                    --card-mod-icon: mdi:fan;
+                    animation: spin 1s linear infinite;
+                  {% else %}
+                    --card-mod-icon: mdi:air-conditioner; 
+                  {% endif %}
+                  display: flex;
+                }
+                @keyframes cool {
+                  0%, 100% { transform: rotate(25deg); }
+                  25% { transform: rotate(-25deg); }
+                  50% { transform: rotate(50deg); }
+                  75% { transform: rotate(-50deg); }
+                }
+                @keyframes heat {
+                  0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
+                  10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
+                  20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
+                  30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
+                  40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
+                  50% { --icon-color: rgba(var(--rgb-red), 0); }
+                }
+                @keyframes dry {
+                  0%, 100% { --icon-symbol-size: 21px; }
+                  10%, 90% { --icon-symbol-size: 22px; }
+                  20%, 80% { --icon-symbol-size: 23px; }
+                  30%, 70% { --icon-symbol-size: 24px; }
+                  40%, 60% { --icon-symbol-size: 25px; }
+                  50% { --icon-symbol-size: 26px; }
+                }
+          - type: vertical-stack
+            cards:
+              - type: tile
+                entity: switch.hanklevarmer_hanklevarmer_turned_on
+                state_content:
+                  - power
+                  - last-changed
+              - type: tile
+                entity: fan.baderomsvifte_baderomsvifte_turned_on
+                card_mod:
+                  style: |
+                    ha-state-icon {
+                      {% if is_state(config.entity, 'on') %}
+                      animation: rotate .5s infinite linear}
+                    @keyframes rotate {
+                        0% {
+                          transform: rotate(0deg);
+                        }
+                        100% {
+                          transform: rotate(-359deg);
+                        }
+                      }
+                      {% endif %}
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: switch.creality_k1_creality_k1_turned_on
+  - type: custom:button-card
+    template: card_title
+    name: 🌳 Ute
+    styles:
+      card:
+        - margin-top: 6px
+        - margin-left: 10px
+        - margin-bottom: 0px
+        - padding: 2px
+      name:
+        - font-size: 1.3rem
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "off"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: tile
+                      entity: light.veranda_lampe_venstre
+                      state_content:
+                        - state
+                        - last-changed
+                    - type: tile
+                      entity: light.veranda_lampe_hoyre
+                      state_content:
+                        - state
+                        - last-changed
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "on"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: custom:stack-in-card
+                  cards:
+                    - type: vertical-stack
+                      cards:
+                        - type: custom:mushroom-entity-card
+                          entity: switch.creality_k1_creality_k1_turned_on
+                          name: Sprinkler
+                          icon: mdi:sprinkler
+                          vertical: true
+                          card_mod:
+                            style: >
+                              {% if is_state('valve.sprinkerl_veranda_zone_1',
+                              'open') %}
+
+                              ha-state-icon {
+                                  animation: sprinkle 2s linear infinite;
+                                  transform-origin: 29% 88%; 
+                                }
+                                @keyframes sprinkle {
+                                  0%, 15%, 30%, 45%, 60%, 100% { clip-path: inset(0 55% 0 0); transform: rotate(0deg); }
+                                  1%, 16%, 31%, 46% { clip-path: inset(0 0 0 0); transform: rotate(-10deg); }
+                                  6%, 21%, 36%, 51% { transform: rotate(2deg); }
+                                }
+                              {% endif %}
+                        - type: custom:mushroom-number-card
+                          card_mod:
+                            style: |
+                              ha-card {
+                                border: 0px;
+                                box-shadow: none;
+                                }
+                          entity: input_number.verandabed_kjoretid
+                          display_mode: buttons
+                          primary_info: none
+                          secondary_info: none
+                          icon_type: none
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.veranda_lampe_venstre
+                      state_content:
+                        - state
+                        - last-changed
+                    - type: tile
+                      entity: light.veranda_lampe_hoyre
+                      state_content:
+                        - state
+                        - last-changed
+            - type: custom:button-card
+              entity: sensor.weather_info_tutorial
+              show_icon: false
+              show_name: false
+              label: |
+                [[[ return entity.attributes.condition ]]]
+              show_label: true
+              styles:
+                custom_fields:
+                  icon:
+                    - justify-self: end
+                    - align-self: end
+                  temp:
+                    - justify-self: start
+                    - align-self: end
+                    - font-size: 46px
+                    - font-weight: 400
+                  feellike:
+                    - justify-self: start
+                    - align-self: start
+                    - font-size: 12px
+                    - font-weight: 400
+                  wind:
+                    - justify-self: end
+                    - font-size: 24px
+                    - font-weight: 500
+                    - line-height: 18px
+                    - padding-right: 40px
+                  rain:
+                    - justify-self: start
+                    - font-size: 24px
+                    - font-weight: 500
+                    - line-height: 18px
+                    - padding-left: 40px
+                grid:
+                  - grid-template-areas: >-
+                      "icon icon temp temp" "icon icon feellike feellike" "l l l
+                      l" "wind wind rain rain"
+                  - grid-template-columns: 1fr 1fr 1fr 1fr
+                  - grid-template-rows: min-content min-content max-content max-content
+                card:
+                  - padding: 12px
+                  - background: var
+                label:
+                  - justify-self: center
+                  - font-size: 18px
+                  - font-weight: 600
+                  - margin-bottom: 30px
+                  - text-transform: capitalize
+              custom_fields:
+                icon: >
+                  [[[ return '<img src="' + entity.attributes.cond_icon + '"
+                  width="140" height="140" />' ]]]
+                temp: >
+                  [[[ return entity.attributes.temperature + '<span
+                  style="font-size:0.5em">°C</span>' ]]]
+                feellike: >
+                  [[[ return 'Feels like: ' + entity.attributes.feels_like +
+                  '°C' ]]]
+                wind: >
+                  [[[ return entity.attributes.wind_speed + ' <span
+                  style="font-size:0.5em">m/s<br>' + entity.attributes.wind_desc
+                  + ' (' + entity.attributes.wind_dir + ')</span>' ]]]
+                rain: >
+                  [[[ return entity.attributes.precipitation + '<span
+                  style="font-size:0.5em">mm<br>' +
+                  entity.attributes.precipitation_percent + '
+                  %</span>'             ]]]
+  - type: custom:button-card
+    color_type: blank-card
+    styles:
+      card:
+        - height: 150px
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.pult_2
+        state: playing
+    card:
+      type: custom:button-card
+      show_label: true
+      entity: media_player.pult_2
+      name: "[[[ return states[ entity.entity_id ].attributes.media_artist ]]]"
+      label: "[[[ return states[ entity.entity_id ].attributes.media_title ]]]"
+      show_state: false
+      show_entity_picture: true
+      styles:
+        grid:
+          - grid-template-areas: |
+              "i play_state button"
+              "i l button"
+              "i n button"
+              "bar bar bar"
+          - grid-template-columns: min-content
+          - grid-template-rows: min-content min-content min-content
+          - column-gap: 15px
+        icon:
+          - width: 60px
+        card:
+          - padding: 10px
+          - height: 80px
+          - width: 94%
+          - overflow: hidden
+          - position: fixed
+          - bottom: 115px
+          - z-index: 4
+          - border-radius: 25px 25px 25px 25px
+          - box-shadow: >-
+              rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px
+              2px 16px 0px;
+        img_cell:
+          - background: var(--color-dark-gray)
+          - border-radius: 15px
+          - width: 50px
+          - height: 50px
+          - justify-self: start
+          - align-self: start
+          - left: 10px
+          - top: 4px
+        state:
+          - font-size: 10px
+          - justify-self: start
+          - align-self: start
+          - color: var(--color-dark-gray)
+          - padding-left: 25px
+          - font-family: montserrat
+        name:
+          - font-size: 11px
+          - justify-self: start
+          - align-self: start
+          - padding-left: 15px
+          - font-family: montserrat
+          - animation: my-animation 15s linear infinite
+        label:
+          - justify-self: start
+          - align-self: end
+          - font-weight: 700
+          - padding-left: 15px
+          - font-family: montserrat
+          - font-size: 13px
+        custom_fields:
+          button:
+            - justify-self: end
+            - align-self: center
+            - padding-right: 20px
+            - padding-top: 7px
+          play_state:
+            - padding-top: 5px
+            - font-size: 10px
+            - justify-self: start
+            - align-self: start
+            - color: var(--color-dark-gray)
+            - padding-left: 15px
+            - font-family: montserrat
+          bar:
+            - justify-self: start
+            - align-self: start
+            - width: 86%
+            - height: 2px
+            - background: "#cccccc"
+            - margin-left: 25px
+            - margin-top: 10px
+      custom_fields:
+        button:
+          card:
+            type: custom:button-card
+            icon: mdi:play
+            entity: "[[[ return entity.entity_id ]]]"
+            show_name: false
+            tap_action:
+              action: call-service
+              service: media_player.media_play_pause
+              target:
+                entity_id: "[[[ return entity.entity_id ]]]"
+            styles:
+              card:
+                - overflow: null
+                - background: "#131314"
+                - border-radius: 15px
+                - left: 12px
+              icon:
+                - width: 20px
+                - color: white
+              img_cell:
+                - padding: 11px
+                - width: 29px
+                - height: 26px
+            state:
+              - value: playing
+                icon: mdi:pause
+        play_state: >
+          [[[ return states[entity.entity_id].state + " - " +
+          states[entity.entity_id].attributes.source]]]
+  - type: conditional
+    conditions:
+      - condition: screen
+        media_query: "(min-width: 0px) and (max-width: 767px)"
+    card:
+      type: custom:vertical-stack-in-card
+      horizontal: true
+      cards:
+        - type: custom:mushroom-template-card
+          primary: Home
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Server
+          icon: mdi:nas
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit-server
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Energy
+          icon: mdi:lightning-bolt-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/energi
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Map
+          icon: mdi:map-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/map
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                  --mush-icon-border-radius: 16px;
+                }
+      card_mod:
+        style: |
+          ha-card {
+            position: fixed !important;
+            bottom: 0px ;
+            width: 100%;
+            border-radius: 0px 0px 0px 0px;
+            height: 13%;
+            left: -1px;
+            padding-bottom: 100;
+            padding-left: 10px;
+            z-index: 0; 
+              }
+icon: mdi:home
+theme: minimalist-mobile
