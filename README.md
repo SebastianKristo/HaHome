@@ -4,4 +4,4 @@ HaHome is a Homekit and Google Home inspired dashboard design for HomeAssistant,
 
 
 
-![Alt text](w_300/IMG_0277-left.png)
+![Alt text](/w_300/IMG_0277-left.png)
