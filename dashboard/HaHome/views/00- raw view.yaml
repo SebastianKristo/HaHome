@@ -1,3 +1,38 @@
+button_card_templates:
+  card_title:
+    tap_action:
+      action: none
+    show_icon: false
+    show_label: true
+    show_name: true
+    styles:
+      card:
+        - background-color: rgba(0,0,0,0)
+        - box-shadow: none
+        - height: auto
+        - width: auto
+      grid:
+        - grid-template-areas: '''n'' ''l'''
+        - grid-template-columns: 1fr
+        - grid-template-rows: min-content min-content
+      name:
+        - justify-self: start
+        - font-weight: bold
+      label:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 1rem
+        - opacity: '0.4'
+  list_2_items:
+    styles:
+      grid:
+        - grid-template-areas: '''item1 item2'''
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: min-content
+        - column-gap: 7px
+      card:
+        - box-shadow: none
+        - padding: 0px
 views:
   - title: Home
     path: homekit
@@ -6355,38 +6390,4 @@ views:
                   }
     icon: mdi:desk
     type: custom:vertical-layout
-button_card_templates:
-  card_title:
-    tap_action:
-      action: none
-    show_icon: false
-    show_label: true
-    show_name: true
-    styles:
-      card:
-        - background-color: rgba(0,0,0,0)
-        - box-shadow: none
-        - height: auto
-        - width: auto
-      grid:
-        - grid-template-areas: '''n'' ''l'''
-        - grid-template-columns: 1fr
-        - grid-template-rows: min-content min-content
-      name:
-        - justify-self: start
-        - font-weight: bold
-      label:
-        - justify-self: start
-        - font-weight: bold
-        - font-size: 1rem
-        - opacity: '0.4'
-  list_2_items:
-    styles:
-      grid:
-        - grid-template-areas: '''item1 item2'''
-        - grid-template-columns: 1fr 1fr
-        - grid-template-rows: min-content
-        - column-gap: 7px
-      card:
-        - box-shadow: none
-        - padding: 0px
+
