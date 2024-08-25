@@ -1,0 +1,432 @@
+title: Map
+path: map
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /config
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:menu
+        entity: sensor.pc_soverom_temperature
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: spacer
+      - type: custom:button-card
+        tap_action:
+          action: assist
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:microphone
+        entity: sensor.pc_soverom_temperature
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /config
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:plus
+        entity: sensor.pc_soverom_temperature
+      - type: custom:button-card
+        tap_action:
+          action: toggle
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '0' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:dots-vertical
+        entity: input_boolean.themes_homekit
+  - type: custom:button-card
+    tap_action:
+      action: navigate
+      navigation_path: /media-browser
+    show_icon: false
+    show_label: true
+    show_name: true
+    styles:
+      card:
+        - background-color: rgba(0,0,0,0)
+        - box-shadow: none
+        - height: auto
+        - width: auto
+        - margin-top: 6px
+        - margin-left: 6px
+        - margin-bottom: 0px
+        - padding: 2px
+      grid:
+        - grid-template-areas: "'n' 'l'"
+        - grid-template-columns: 1fr
+        - grid-template-rows: min-content min-content
+      name:
+        - justify-self: start
+        - font-weight: 400
+        - font-size: 2.5rem
+      label:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 1rem
+        - opacity: "0.4"
+    name: Map 📍
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: map
+        entities:
+          - entity: person.sebastian
+          - entity: person.cybele
+          - entity: person.rune
+        dark_mode: false
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: person.sebastian
+                show_entity_picture: true
+              - type: tile
+                entity: person.cybele
+                show_entity_picture: true
+              - type: tile
+                entity: person.rune
+                show_entity_picture: true
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: tile
+                    entity: zone.hjemme
+                    color: green
+                  - type: tile
+                    entity: zone.toten
+                    color: pink
+                  - type: tile
+                    entity: zone.stromstad
+                    color: primary
+              - type: vertical-stack
+                cards:
+                  - type: tile
+                    entity: sensor.reisetid_til_oslo
+                    color: green
+                  - type: tile
+                    entity: sensor.reisetid_til_toten
+                    color: pink
+                  - type: tile
+                    entity: sensor.reisetid_til_stromstad
+                    color: primary
+  - type: custom:button-card
+    color_type: blank-card
+    styles:
+      card:
+        - height: 150px
+  - type: custom:button-card
+    color_type: blank-card
+    styles:
+      card:
+        - height: 150px
+  - type: conditional
+    conditions:
+      - condition: screen
+        media_query: "(min-width: 0px) and (max-width: 767px)"
+    card:
+      type: custom:vertical-stack-in-card
+      horizontal: true
+      cards:
+        - type: custom:mushroom-template-card
+          primary: Hjem
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Server
+          icon: mdi:nas
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit-server
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Energi
+          icon: mdi:lightning-bolt-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/energi
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Kart
+          icon: mdi:map-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/map
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+      card_mod:
+        style: |
+          ha-card {
+            position: fixed !important;
+            bottom: 0px ;
+            width: 100%;
+            border-radius: 0px 0px 0px 0px;
+            height: 13%;
+            left: -1px;
+            padding-bottom: 100;
+            padding-left: 10px;
+            z-index: 0; 
+              }
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.pult_2
+        state: playing
+    card:
+      type: custom:button-card
+      show_label: true
+      entity: media_player.pult_2
+      name: "[[[ return states[ entity.entity_id ].attributes.media_artist ]]]"
+      label: "[[[ return states[ entity.entity_id ].attributes.media_title ]]]"
+      show_state: false
+      show_entity_picture: true
+      styles:
+        grid:
+          - grid-template-areas: |
+              "i play_state button"
+              "i l button"
+              "i n button"
+              "bar bar bar"
+          - grid-template-columns: min-content
+          - grid-template-rows: min-content min-content min-content
+          - column-gap: 15px
+        icon:
+          - width: 60px
+        card:
+          - padding: 10px
+          - height: 80px
+          - width: 94%
+          - overflow: hidden
+          - position: fixed
+          - bottom: 115px
+          - z-index: 4
+          - border-radius: 25px 25px 25px 25px
+          - box-shadow: >-
+              rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px
+              2px 16px 0px;
+        img_cell:
+          - background: var(--color-dark-gray)
+          - border-radius: 15px
+          - width: 50px
+          - height: 50px
+          - justify-self: start
+          - align-self: start
+          - left: 10px
+          - top: 4px
+        state:
+          - font-size: 10px
+          - justify-self: start
+          - align-self: start
+          - color: var(--color-dark-gray)
+          - padding-left: 25px
+          - font-family: montserrat
+        name:
+          - font-size: 11px
+          - justify-self: start
+          - align-self: start
+          - padding-left: 15px
+          - font-family: montserrat
+          - animation: my-animation 15s linear infinite
+        label:
+          - justify-self: start
+          - align-self: end
+          - font-weight: 700
+          - padding-left: 15px
+          - font-family: montserrat
+          - font-size: 13px
+        custom_fields:
+          button:
+            - justify-self: end
+            - align-self: center
+            - padding-right: 20px
+            - padding-top: 7px
+          play_state:
+            - padding-top: 5px
+            - font-size: 10px
+            - justify-self: start
+            - align-self: start
+            - color: var(--color-dark-gray)
+            - padding-left: 15px
+            - font-family: montserrat
+          bar:
+            - justify-self: start
+            - align-self: start
+            - width: 86%
+            - height: 2px
+            - background: "#cccccc"
+            - margin-left: 25px
+            - margin-top: 10px
+      custom_fields:
+        button:
+          card:
+            type: custom:button-card
+            icon: mdi:play
+            entity: "[[[ return entity.entity_id ]]]"
+            show_name: false
+            tap_action:
+              action: call-service
+              service: media_player.media_play_pause
+              target:
+                entity_id: "[[[ return entity.entity_id ]]]"
+            styles:
+              card:
+                - overflow: null
+                - background: "#131314"
+                - border-radius: 15px
+                - left: 12px
+              icon:
+                - width: 20px
+                - color: white
+              img_cell:
+                - padding: 11px
+                - width: 29px
+                - height: 26px
+            state:
+              - value: playing
+                icon: mdi:pause
+        play_state: >
+          [[[ return states[entity.entity_id].state + " - " +
+          states[entity.entity_id].attributes.source]]]
+icon: mdi:map
+type: custom:vertical-layout
