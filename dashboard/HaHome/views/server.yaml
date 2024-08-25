@@ -1,0 +1,1285 @@
+title: Server
+path: homekit-server
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /config
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:menu
+        entity: sensor.pc_soverom_temperature
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: spacer
+      - type: custom:button-card
+        tap_action:
+          action: assist
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:microphone
+        entity: sensor.pc_soverom_temperature
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /config
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '1' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:plus
+        entity: sensor.pc_soverom_temperature
+      - type: custom:button-card
+        tap_action:
+          action: toggle
+        state:
+          - operator: template
+            value: |
+              [[[ return entity.state > '0' ]]]
+            styles:
+              card:
+                - background: transparent
+        styles:
+          card:
+            - width: 34px
+            - height: 34px
+          img_cell:
+            - width: 30px
+            - height: 30px
+          icon:
+            - width: 22px
+            - padding-left: null
+            - padding-right: null
+            - padding-top: 2px
+            - padding-bottom: null
+        icon: mdi:dots-vertical
+        entity: input_boolean.themes_homekit
+  - type: custom:button-card
+    tap_action:
+      action: navigate
+      navigation_path: /media-browser
+    show_icon: false
+    show_label: true
+    show_name: true
+    styles:
+      card:
+        - background-color: rgba(0,0,0,0)
+        - box-shadow: none
+        - height: auto
+        - width: auto
+        - margin-top: 6px
+        - margin-left: 6px
+        - margin-bottom: 0px
+        - padding: 2px
+      grid:
+        - grid-template-areas: "'n' 'l'"
+        - grid-template-columns: 1fr
+        - grid-template-rows: min-content min-content
+      name:
+        - justify-self: start
+        - font-weight: 400
+        - font-size: 2.5rem
+      label:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 1rem
+        - opacity: "0.4"
+    name: Server 🌐
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_homeassistant
+                    primary: HomeAssist
+                    icon_color: blue
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_homeassistant',
+                      'on') %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_homeassistant',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_homeassistant',
+                      'on') %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_homeassistant',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: HomeAssistant
+                    icon: mdi:home-assistant
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }  
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_homeassistant
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_plex
+                    primary: Plex
+                    icon_color: yellow
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_plex', 'on') %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_plex',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_plex', 'on') %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_plex',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: Plex
+                    icon: mdi:plex
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }   
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_plex
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_asus
+                    primary: Asus
+                    icon_color: green
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_asus', 'on') %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_asus',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_asus', 'on') %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_asus',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: Asus
+                    icon: mdi:router-network
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }  
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_asus
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_pihole
+                    primary: Pi-hole
+                    icon_color: red
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_pihole', 'on')
+                      %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_pihole',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_pihole', 'on')
+                      %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_pihole',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: Pi-hole
+                    icon: mdi:pi-hole
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }   
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_pihole
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_proxmox
+                    primary: Proxmox
+                    icon_color: orange
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_proxmox', 'on')
+                      %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_proxmox',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_proxmox', 'on')
+                      %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_proxmox',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: Proxmox
+                    icon: mdi:approximately-equal-box
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }  
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_proxmox
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_scrypted
+                    primary: Scrypted
+                    icon_color: purple
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_scrypted', 'on')
+                      %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_scrypted',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_scrypted', 'on')
+                      %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_scrypted',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: Plex
+                    icon: mdi:security
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }   
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_scrypted
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+      - type: custom:vertical-stack-in-card
+        horizontal: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_unifi
+                    primary: Unifi
+                    icon_color: white
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_unifi', 'on')
+                      %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_unifi',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_unifi', 'on')
+                      %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_unifi',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}                    
+                    name: HomeAssistant
+                    icon: mdi:wifi
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }  
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_unifi
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.uptimekuma_unraid
+                    primary: Unraid
+                    icon_color: brown
+                    badge_icon: >
+                      {% if is_state('binary_sensor.uptimekuma_unraid', 'on')
+                      %}  
+                        mdi:check
+                      {% elif is_state('binary_sensor.uptimekuma_unraid',
+                      'unknown')  %}
+                        mdi:help-circle
+                      {% else %}
+                        disabled
+                      {% endif %}   
+                    badge_color: >
+                      {% if is_state('binary_sensor.uptimekuma_unraid', 'on')
+                      %}  
+                        green
+                      {% elif is_state('binary_sensor.uptimekuma_unraid',
+                      'unknown')  %}
+                        orange
+                      {% else %}
+                        red
+                      {% endif %}   
+                    name: Plex
+                    icon: mdi:harddisk
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card{
+                            border-color: transparent
+                          }
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 15px !important;
+                            position: relative;
+                            top: -10px;
+                            left: 3px;
+                            overflow: visible !important;
+                            color: var(primary-text-color);
+                            font-weight: bold;
+                            text-overflow: ellipsis;
+                          }
+                          .primary:after {
+                            content: "{{ states(config.entity) }}";
+                            position: absolute;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            {% if is_state(config.entity, 'on') %}  
+                              color: var(--google-green);
+                            {% else %}
+                              color: var(--google-red);
+                            {% endif %}
+                            font-weight: bolder;
+                            top: 3.5px;
+                            left: 125px;
+                            width: 16px;
+                            height: 16px;
+                            font-size: 14px; 
+                          }   
+                  - type: custom:uptime-card
+                    entity: binary_sensor.uptimekuma_plex
+                    hours_to_show: 2
+                    alignment:
+                      tooltip_first: true
+                    show:
+                      footer: false
+                      header: false
+                      status: false
+                    bar:
+                      height: 40
+                      round: 10
+                      spacing: 10
+                      amount: 6
+                    card_mod:
+                      style: |
+                        ha-card {
+                          position: relative;
+                          top: 10px;
+                          left: -55%;
+                          overflow: visible !important;
+                          width: 150%;
+                          border-color: transparent;
+                        }
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          <h2><font color= lightgrey><ha-icon icon="mdi:speedometer"></ha-icon> 
+          Speedtest</font></h2>
+        card_mod:
+          style: |
+            ha-card {
+              background: none;
+              --ha-card-box-shadow: 0px;
+              --ha-card-border-width: 0;
+            }
+      - type: tile
+        name: Server
+        icon: mdi:speedometer
+        entity: sensor.speedtest_ping
+        state_content:
+          - server_name
+          - server_country
+        color: blue
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: grid
+            square: false
+            columns: 1
+            cards:
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: template
+                    entity: sensor.speedtest_download
+                    icon: mdi:arrow-down
+                    icon_color: "#6afff3"
+                    content: |
+                      {% if is_number(states(entity)) %}
+                        {{ states(entity)|round(0) }} Mbps
+                      {% else %}
+                        Unavailable
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: more-info
+                    double_tap_action:
+                      action: more-info
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --chip-box-shadow: none;
+                          --chip-border-width: 0;
+                          --chip-font-size: 11px;
+                          --chip-font-weight: none;
+                        }
+                  - type: template
+                    entity: sensor.speedtest_ping
+                    icon: mdi:timer
+                    icon_color: "#fff38e"
+                    content: |
+                      {% if is_number(states(entity)) %}
+                        {{ states(entity) }} ms
+                      {% else %}
+                        Unavailable
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: more-info
+                    double_tap_action:
+                      action: more-info
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --chip-box-shadow: none;
+                          --chip-border-width: 0;
+                          --chip-font-size: 11px;
+                          --chip-font-weight: none;
+                        }
+                  - type: template
+                    entity: sensor.speedtest_upload
+                    icon: mdi:arrow-up
+                    icon_color: "#bf71ff"
+                    content: |
+                      {% if is_number(states(entity)) %}
+                        {{ states(entity)|round(0) }} Mbps
+                      {% else %}
+                        Unavailable
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: more-info
+                    double_tap_action:
+                      action: more-info
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --chip-box-shadow: none;
+                          --chip-border-width: 0;
+                          --chip-font-size: 11px;
+                          --chip-font-weight: none;
+                        }      
+                alignment: center
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.speedtest_ping
+                name: Ping
+                color: "#fff38e"
+              - entity: sensor.speedtest_upload
+                name: Upload
+                color: "#bf71ff"
+              - entity: sensor.speedtest_download
+                name: Download
+                color: "#6afff3"
+                y_axis: secondary
+            height: 120
+            hours_to_show: 24
+            line_width: 2
+            font_size: 50
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+  - type: custom:button-card
+    color_type: blank-card
+    styles:
+      card:
+        - height: 150px
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.pult_2
+        state: playing
+    card:
+      type: custom:button-card
+      show_label: true
+      entity: media_player.pult_2
+      name: "[[[ return states[ entity.entity_id ].attributes.media_artist ]]]"
+      label: "[[[ return states[ entity.entity_id ].attributes.media_title ]]]"
+      show_state: false
+      show_entity_picture: true
+      styles:
+        grid:
+          - grid-template-areas: |
+              "i play_state button"
+              "i l button"
+              "i n button"
+              "bar bar bar"
+          - grid-template-columns: min-content
+          - grid-template-rows: min-content min-content min-content
+          - column-gap: 15px
+        icon:
+          - width: 60px
+        card:
+          - padding: 10px
+          - height: 80px
+          - width: 94%
+          - overflow: hidden
+          - position: fixed
+          - bottom: 115px
+          - z-index: 4
+          - border-radius: 25px 25px 25px 25px
+          - box-shadow: >-
+              rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px
+              2px 16px 0px;
+        img_cell:
+          - background: var(--color-dark-gray)
+          - border-radius: 15px
+          - width: 50px
+          - height: 50px
+          - justify-self: start
+          - align-self: start
+          - left: 10px
+          - top: 4px
+        state:
+          - font-size: 10px
+          - justify-self: start
+          - align-self: start
+          - color: var(--color-dark-gray)
+          - padding-left: 25px
+          - font-family: montserrat
+        name:
+          - font-size: 11px
+          - justify-self: start
+          - align-self: start
+          - padding-left: 15px
+          - font-family: montserrat
+          - animation: my-animation 15s linear infinite
+        label:
+          - justify-self: start
+          - align-self: end
+          - font-weight: 700
+          - padding-left: 15px
+          - font-family: montserrat
+          - font-size: 13px
+        custom_fields:
+          button:
+            - justify-self: end
+            - align-self: center
+            - padding-right: 20px
+            - padding-top: 7px
+          play_state:
+            - padding-top: 5px
+            - font-size: 10px
+            - justify-self: start
+            - align-self: start
+            - color: var(--color-dark-gray)
+            - padding-left: 15px
+            - font-family: montserrat
+          bar:
+            - justify-self: start
+            - align-self: start
+            - width: 86%
+            - height: 2px
+            - background: "#cccccc"
+            - margin-left: 25px
+            - margin-top: 10px
+      custom_fields:
+        button:
+          card:
+            type: custom:button-card
+            icon: mdi:play
+            entity: "[[[ return entity.entity_id ]]]"
+            show_name: false
+            tap_action:
+              action: call-service
+              service: media_player.media_play_pause
+              target:
+                entity_id: "[[[ return entity.entity_id ]]]"
+            styles:
+              card:
+                - overflow: null
+                - background: "#131314"
+                - border-radius: 15px
+                - left: 12px
+              icon:
+                - width: 20px
+                - color: white
+              img_cell:
+                - padding: 11px
+                - width: 29px
+                - height: 26px
+            state:
+              - value: playing
+                icon: mdi:pause
+        play_state: >
+          [[[ return states[entity.entity_id].state + " - " +
+          states[entity.entity_id].attributes.source]]]
+  - type: conditional
+    conditions:
+      - condition: screen
+        media_query: "(min-width: 0px) and (max-width: 767px)"
+    card:
+      type: custom:vertical-stack-in-card
+      horizontal: true
+      cards:
+        - type: custom:mushroom-template-card
+          primary: Hjem
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Server
+          icon: mdi:nas
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit-server
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Energi
+          icon: mdi:lightning-bolt-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/energi
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Kart
+          icon: mdi:map-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/map
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                  --mush-icon-border-radius: 16px;
+                }
+      card_mod:
+        style: |
+          ha-card {
+            position: fixed !important;
+            bottom: 0px ;
+            width: 100%;
+            border-radius: 0px 0px 0px 0px;
+            height: 13%;
+            left: -1px;
+            padding-bottom: 100;
+            padding-left: 10px;
+            z-index: 0; 
+              }
+icon: mdi:server
+type: custom:vertical-layout
