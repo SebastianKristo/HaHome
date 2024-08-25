@@ -18,7 +18,7 @@ Hacs:
 - https://github.com/RomRider/apexcharts-card
 
 # What is HaHome?
-HaHome is a dashboard design for HomeAssistant, inspired by HomeKit and Google Home. It was created by Sebastian.
+HaHome is a dashboard design for HomeAssistant, inspired by HomeKit and Google Home. It was created by Sebastian K.J.
 
 ![Alt text](/Pictures/IMG_0277-left.png)
 ![Alt text](/Pictures/IMG_0274-left.png)
