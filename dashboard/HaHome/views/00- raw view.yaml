@@ -2997,12 +2997,9 @@ views:
                     command: MEDIA_PLAY
             columns: 4
       - type: conditional
-        conditions:
-          - condition: screen
-            media_query: '(min-width: 0px) and (max-width: 767px)'
+        conditions: []
         card:
           type: custom:vertical-stack-in-card
-          horizontal: true
           cards:
             - type: custom:mushroom-template-card
               primary: Hjem
