@@ -28,7 +28,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:menu
-        entity: sensor.pc_soverom_temperature
+        entity: sensor.hus_temperature
       - type: custom:mushroom-chips-card
         chips:
           - type: spacer
@@ -57,7 +57,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:plus
-        entity: sensor.pc_soverom_temperature
+        entity: sensor.hus_temperature
       - type: custom:button-card
         tap_action:
           action: assist
@@ -82,7 +82,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:message-processing-outline
-        entity: sensor.pc_soverom_temperature
+        entity: sensor.hus_temperature
       - type: custom:button-card
         tap_action:
           action: toggle
@@ -107,7 +107,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:dots-vertical
-        entity: input_boolean.themes_homekit
+        entity: input_boolean.kiosk_mode
   - type: custom:button-card
     tap_action:
       action: none
@@ -179,7 +179,7 @@ cards:
             - font-size: 16px
             - padding: 2px 0
         name: Climate
-        entity: sensor.hus_tempraturee
+        entity: sensor.hus_temperature
         icon: mdi:thermometer
         tap_action:
           action: navigate
@@ -224,7 +224,7 @@ cards:
             - font-size: 16px
             - padding: 2px 0
         name: Lights
-        entity: sensor.current_lights_off
+        entity: sensor.current_lights_on
         icon: mdi:lightbulb
         tap_action:
           action: navigate
@@ -269,7 +269,7 @@ cards:
             - font-size: 16px
             - padding: 2px 0
         name: Sikkerhet
-        entity: lock.dor_las_3
+        entity: lock.kristo_jemtland_dor_las_oslo_kristo_jemtland_dor_las_oslo_last
         icon: mdi:lock
         tap_action:
           action: navigate
@@ -279,17 +279,13 @@ cards:
             return (entity.state) 
           ]]]
         show_label: true
-  - type: custom:button-card
-    template: card_title
-    name: 📽️ Kamera
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+  - type: heading
+    icon: ""
+    heading: 📽️ Kamera
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: ""
   - type: custom:swipe-card
     cards:
       - type: custom:vertical-stack-in-card
@@ -303,7 +299,7 @@ cards:
                 camera_view: auto
                 type: picture-entity
                 image: https://demo.home-assistant.io/stub_config/bedroom.png
-                entity: camera.ringeklokke_g4_doorbell_high_resolution_channel
+                entity: camera.g4_doorbell_pro_high_resolution_channel
                 aspect_ratio: "9:10"
           - type: custom:vertical-stack-in-card
             horizontal: false
@@ -313,13 +309,13 @@ cards:
                 camera_view: auto
                 type: picture-entity
                 image: https://demo.home-assistant.io/stub_config/bedroom.png
-                entity: camera.verandakamera_g3_bullet_high_resolution_channel
+                entity: camera.veranda_g3_bullet_high_resolution_channel
               - show_state: false
                 show_name: false
                 camera_view: auto
                 type: picture-entity
                 image: https://demo.home-assistant.io/stub_config/bedroom.png
-                entity: camera.veranda_sofagruppe_g3_flex_high_resolution_channel
+                entity: camera.server_g3_flex_high_resolution_channel
       - type: custom:vertical-stack-in-card
         horizontal: true
         cards:
@@ -339,25 +335,32 @@ cards:
             type: picture-entity
             image: https://demo.home-assistant.io/stub_config/bedroom.png
             entity: camera.bedroom
-  - type: custom:button-card
-    template: card_title
-    name: 🚪 Inngang
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+  - type: heading
+    icon: ""
+    heading: 🚪 Inngang
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: "#inngang"
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_temperatur
+        icon: ""
+        state_content: state
+        color: state
+      - type: entity
+        entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_luftfuktighet
   - type: vertical-stack
     cards:
       - type: horizontal-stack
         cards:
-          - type: tile
-            entity: lock.dor_las_3
-            features:
+          - features:
               - type: lock-commands
+            type: tile
+            entity: >-
+              lock.kristo_jemtland_dor_las_oslo_kristo_jemtland_dor_las_oslo_last
             card_mod:
               style: |
                 ha-card:active {
@@ -393,7 +396,7 @@ cards:
                   transition: 0s;
                 }
           - type: tile
-            entity: light.color_temperature_light_1_4
+            entity: light.inngang_bordlampe
             vertical: false
             card_mod:
               style: |
@@ -412,7 +415,7 @@ cards:
                   transition: 0s;
                 }
           - type: tile
-            entity: switch.trappegang_ovn
+            entity: light.trappelys
             vertical: false
             card_mod:
               style: |
@@ -429,7 +432,7 @@ cards:
           type: horizontal-stack
           cards:
             - type: tile
-              entity: cover.garasje_apner
+              entity: calendar.fodselsdager
               card_mod:
                 style: |
                   ha-state-icon {
@@ -465,32 +468,28 @@ cards:
                     55% { box-shadow: 0 0 1px 0px rgba(var(--rgb-blue), 0.3) inset; }
                     100% { box-shadow: 0 0 5px 15px transparent inset; }
                   }
-  - type: custom:button-card
-    template: card_title
+  - type: heading
+    icon: ""
+    heading: 📺 Pult
+    heading_style: title
     tap_action:
       action: navigate
       navigation_path: /ui-minimalist/homekit-pult
-    name: 📺 Pult
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+    badges:
+      - type: entity
+        entity: sensor.multisensor_multisensor_temperature
   - type: vertical-stack
     cards:
       - type: horizontal-stack
         cards:
-          - type: tile
-            entity: light.color_temperature_light_1_2
-            features:
+          - features:
               - type: light-brightness
+            type: tile
+            entity: light.pultlampe
           - type: vertical-stack
             cards:
               - type: tile
-                entity: light.pult_skjermer_2
+                entity: light.pultskjermer
                 state_content:
                   - state
                   - last-changed
@@ -501,7 +500,7 @@ cards:
                       transition: 0s;
                     }
               - type: tile
-                entity: light.dimmable_light_1_2
+                entity: light.oljelampe_pc
                 state_content:
                   - state
                   - last-changed
@@ -525,9 +524,11 @@ cards:
                   transition: 0s;
                 }
           - type: tile
-            entity: media_player.pult_2
+            entity: media_player.pult
             vertical: false
-            name: Pultvifte
+            tap_action:
+              action: navigate
+              navigation_path: "#sonos"
             card_mod:
               style: |
                 ha-state-icon {
@@ -563,51 +564,7 @@ cards:
                         transition: 0s;
                       }
                 - type: tile
-                  entity: media_player.pult_tv
-                  state_content:
-                    - state
-                    - last-changed
-                  hold_action:
-                    action: fire-dom-event
-                    browser_mod:
-                      service: browser_mod.popup
-                      data:
-                        title: Pult Tv
-                        content:
-                          type: custom:firemote-card
-                          entity: media_player.android_tv_192_168_50_134
-                          device_family: chromecast
-                          device_type: chromecast-4k
-                          compatibility_mode: default
-                          apple_tv_remote_entity: remote.stua
-                          app_launch_1: plex
-                          app_launch_2: telia-play
-                          app_launch_3: youtube
-                          app_launch_4: nrk-tv
-                          android_tv_remote_entity: remote.pult_tv
-                          defaultRemoteStyle_override: ""
-                          app_launch_5: ""
-                          scale: "100"
-                          card_mod:
-                            style: |
-                              ha-state-icon {
-                                  animation: tube-on 1s linear, flicker 1s linear 1s infinite alternate;' if is_state(config.entity, 'on') else '--icon-animation: tube-off 2s linear forwards;' }}
-                                }
-                                @keyframes tube-off {
-                                  1%, 15% { transform: scale(1, 0.2); }
-                                  40%  { transform: scale(0.2); opacity: 1; }
-                                  100%  { transform: scale(0.2); opacity: 0; }
-                                }
-                                @keyframes tube-on {
-                                  0% { transform: scale(0.2); opacity: 0; }
-                                  5%  { transform: scale(1, 0.2); opacity: 0.3; }
-                                  15%  { transform: scale(1); opacity: 0.4; }
-                                  100%  { transform: scale(1); opacity: 1; }
-                                }
-                                @keyframes flicker {
-                                  0%, 31.98%, 32.98%, 34.98%, 36.98%, 39.98%, 67.98%, 68.98%, 95.98%, 96.98%, 97.98%, 98.98%, 100% { opacity: 0.6; }
-                                  32%, 33%, 35%, 36%, 37%, 40%, 68%, 69%, 96%, 97%, 98%, 99% { opacity: 1; }
-                                }
+                  entity: switch.pult_skjermer_socket_1
             - type: horizontal-stack
               cards:
                 - type: tile
@@ -631,7 +588,7 @@ cards:
                         }
                       {% endif %}
                 - type: tile
-                  entity: fan.pultvifte_pultvifte_turned_on
+                  entity: fan.pultvifte
                   state_content:
                     - state
                     - last-changed
@@ -650,17 +607,18 @@ cards:
                           60% { transform: scale(1); }
                         }
                       {% endif %}
-  - type: custom:button-card
-    template: card_title
-    name: 🛌 Soverom
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+  - type: heading
+    icon: ""
+    heading: 🛌 Soverom
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: "#soverom"
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.multisensor_multisensor_temperature
   - type: vertical-stack
     cards:
       - type: conditional
@@ -673,10 +631,10 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
-                - type: tile
-                  entity: climate.living_room
-                  features:
+                - features:
                     - type: target-temperature
+                  type: tile
+                  entity: climate.panelovn
                   card_mod:
                     style: |
                       mushroom-shape-icon {
@@ -725,7 +683,7 @@ cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.color_temperature_light_1_3
+                      entity: light.vindulampe
                       vertical: false
                       card_mod:
                         style: |
@@ -735,7 +693,7 @@ cards:
                             box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
                           }
                     - type: tile
-                      entity: light.on_off_plug_1_5
+                      entity: light.gitarlampe
                       card_mod:
                         style: |
                           ha-card:active {
@@ -748,16 +706,23 @@ cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: switch.pc_hoyttaler_pc_hoyttaler_turned_on
+                      entity: switch.hoytallere_pc
                       card_mod:
                         style: |
-                          ha-card:active {
-                            transform: scale(0.975);
-                            transition: 0s;
-                          }
+                          ha-state-icon {
+                              animation: beat 1.3s ease-out infinite both;
+                              transform-origin: 50% 80%;
+                            }
+                            @keyframes beat {
+                              0% { transform: scale(1); }
+                              10% { transform: scale(1.1); }
+                              17% { transform: scale(1.05); }
+                              33% { transform: scale(1.25); }
+                              60% { transform: scale(1); }
+                            }
                     - type: tile
                       entity: light.nattlampe
-                      icon: mdi:music
+                      icon: ""
                       state_content:
                         - state
                         - last-changed
@@ -777,7 +742,7 @@ cards:
                             }
                           {% endif %}
                 - type: custom:mushroom-vacuum-card
-                  entity: vacuum.sir_sweeps_a_lot_2
+                  entity: vacuum.sir_sweeps_a_lot
                   icon_animation: true
                   commands:
                     - locate
@@ -796,10 +761,10 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
-                - type: tile
-                  entity: climate.living_room
-                  features:
+                - features:
                     - type: target-temperature
+                  type: tile
+                  entity: climate.panelovn
                   card_mod:
                     style: |
                       mushroom-shape-icon {
@@ -848,7 +813,7 @@ cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.color_temperature_light_1_3
+                      entity: light.vindulampe
                       vertical: false
                       card_mod:
                         style: |
@@ -858,7 +823,7 @@ cards:
                             box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
                           }
                     - type: tile
-                      entity: light.on_off_plug_1_5
+                      entity: light.gitarlampe
                       card_mod:
                         style: |
                           ha-card:active {
@@ -871,7 +836,7 @@ cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: switch.pc_hoyttaler_pc_hoyttaler_turned_on
+                      entity: switch.hoytallere_pc
                       card_mod:
                         style: |
                           ha-card:active {
@@ -879,7 +844,7 @@ cards:
                             transition: 0s;
                           }
                     - type: tile
-                      entity: media_player.hoytalere
+                      entity: media_player.vegg_hoyttalere
                       icon: mdi:music
                       state_content:
                         - state
@@ -900,7 +865,7 @@ cards:
                             }
                           {% endif %}
                 - type: custom:mushroom-vacuum-card
-                  entity: vacuum.sir_sweeps_a_lot_2
+                  entity: vacuum.sir_sweeps_a_lot
                   icon_animation: true
                   commands:
                     - locate
@@ -912,8 +877,9 @@ cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.seng_led_strip_seng_led_strip_turned_on
+                      entity: light.seng_ledstrip
                       vertical: false
+                      icon: mdi:led-strip-variant
                       card_mod:
                         style: |
                           ha-card:active {
@@ -922,7 +888,7 @@ cards:
                             box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
                           }
                     - type: tile
-                      entity: light.sebastians_taklampe_switch
+                      entity: light.sebastian_taklampe
                       card_mod:
                         style: |
                           ha-card:active {
@@ -950,17 +916,20 @@ cards:
                             transition: 0s;
                             box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
                           }
-  - type: custom:button-card
-    template: card_title
-    name: 🛋️ Stue
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+  - type: heading
+    icon: ""
+    heading: 🛋️ Stue
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: ""
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.stue_temp_og_fukt_stue_temp_og_fukt_temperatur
+      - type: entity
+        entity: sensor.stue_temp_og_fukt_stue_temp_og_fukt_luftfuktighet
   - type: vertical-stack
     cards:
       - type: conditional
@@ -976,7 +945,7 @@ cards:
                 - features:
                     - type: target-temperature
                   type: tile
-                  entity: climate.stue_panelovn_stue_panelovn
+                  entity: climate.stue_panelovn
                   card_mod:
                     style: |
                       mushroom-shape-icon {
@@ -1025,29 +994,67 @@ cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.on_off_plug_1_3
+                      entity: light.taklist
                     - type: tile
-                      entity: light.on_off_plug_2
+                      entity: light.skjenk_lampe
             - type: horizontal-stack
               cards:
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.on_off_plug_2
+                      entity: light.spisebord
                     - type: tile
-                      entity: light.on_off_plug_1
-                - type: tile
-                  entity: light.stue_markise_hoyre_stue_markise_hoyre_2
+                      entity: light.sofabord
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.peislampe
+                    - type: tile
+                      entity: light.stalampe_hjorne
             - type: horizontal-stack
               cards:
                 - type: tile
-                  entity: media_player.stua_2
+                  entity: media_player.stue_tv
+                  tap_action:
+                    action: navigate
+                    navigation_path: "#fjernkontroll"
                   vertical: false
-                  show_entity_picture: true
+                  icon: mdi:television-classic
+                  icon_color: "{{ 'orange' if is_state(entity, 'on') }}"
+                  card_mod:
+                    style: |
+                      ha-state-icon {
+                          animation: tube-on 1s linear, flicker 1s linear 1s infinite alternate;' if is_state(config.entity, 'on') else '--icon-animation: tube-off 2s linear forwards;' }}
+                        }
+                        @keyframes tube-off {
+                          1%, 15% { transform: scale(1, 0.2); }
+                          40%  { transform: scale(0.2); opacity: 1; }
+                          100%  { transform: scale(0.2); opacity: 0; }
+                        }
+                        @keyframes tube-on {
+                          0% { transform: scale(0.2); opacity: 0; }
+                          5%  { transform: scale(1, 0.2); opacity: 0.3; }
+                          15%  { transform: scale(1); opacity: 0.4; }
+                          100%  { transform: scale(1); opacity: 1; }
+                        }
+                        @keyframes flicker {
+                          0%, 31.98%, 32.98%, 34.98%, 36.98%, 39.98%, 67.98%, 68.98%, 95.98%, 96.98%, 97.98%, 98.98%, 100% { opacity: 0.6; }
+                          32%, 33%, 35%, 36%, 37%, 40%, 68%, 69%, 96%, 97%, 98%, 99% { opacity: 1; }
+                        }
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.gronn_sofalampe_gronn_sofalampe_turned_on
+                      entity: light.gronn_sofalampe
+            - type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: cover.markise_venstre
+                  features:
+                    - type: cover-open-close
+                - type: tile
+                  entity: cover.markise_hoyre
+                  features:
+                    - type: cover-open-close
   - type: vertical-stack
     cards:
       - type: conditional
@@ -1060,67 +1067,10 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
-                - features:
-                    - type: target-temperature
-                  type: tile
-                  entity: climate.panelovn_stue
-                  card_mod:
-                    style: |
-                      mushroom-shape-icon {
-                        {% if is_state(config.entity, 'heat_cool') %}
-                          --card-mod-icon: mdi:autorenew;
-                          animation: spin 3s ease-in-out infinite alternate;
-                        {% elif is_state(config.entity, 'heat') %}
-                          --card-mod-icon: mdi:fire;
-                          animation: heat 2s infinite;
-                        {% elif is_state(config.entity, 'cool') %}
-                          --card-mod-icon: mdi:snowflake;
-                          animation: cool 6s ease-in-out infinite;
-                        {% elif is_state(config.entity, 'dry') %}
-                          --card-mod-icon: mdi:water-percent;
-                          animation: dry 1.5s linear infinite;
-                        {% elif is_state(config.entity, 'fan_only') %}
-                          --card-mod-icon: mdi:fan;
-                          animation: spin 1s linear infinite;
-                        {% else %}
-                          --card-mod-icon: mdi:air-conditioner; 
-                        {% endif %}
-                        display: flex;
-                      }
-                      @keyframes cool {
-                        0%, 100% { transform: rotate(25deg); }
-                        25% { transform: rotate(-25deg); }
-                        50% { transform: rotate(50deg); }
-                        75% { transform: rotate(-50deg); }
-                      }
-                      @keyframes heat {
-                        0%, 100% { --icon-color: rgba(var(--rgb-red), 1); }
-                        10%, 90% { --icon-color: rgba(var(--rgb-red), 0.8); }
-                        20%, 80% { --icon-color: rgba(var(--rgb-red), 0.6); }
-                        30%, 70% { --icon-color: rgba(var(--rgb-red), 0.4); }
-                        40%, 60% { --icon-color: rgba(var(--rgb-red), 0.2); }
-                        50% { --icon-color: rgba(var(--rgb-red), 0); }
-                      }
-                      @keyframes dry {
-                        0%, 100% { --icon-symbol-size: 21px; }
-                        10%, 90% { --icon-symbol-size: 22px; }
-                        20%, 80% { --icon-symbol-size: 23px; }
-                        30%, 70% { --icon-symbol-size: 24px; }
-                        40%, 60% { --icon-symbol-size: 25px; }
-                        50% { --icon-symbol-size: 26px; }
-                      }
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.on_off_plug_1_3
-                    - type: tile
-                      entity: light.on_off_plug_2
-            - type: horizontal-stack
-              cards:
-                - type: vertical-stack
-                  cards:
-                    - type: tile
-                      entity: climate.oljefyr
+                      entity: switch.stue_oljefyr_stue_oljefyr_aktivert
                       state_content:
                         - state
                         - last-changed
@@ -1170,32 +1120,46 @@ cards:
                             50% { --icon-symbol-size: 26px; }
                           }
                     - type: tile
-                      entity: light.on_off_plug_1
-                - type: tile
-                  entity: cover.markise
-                  features:
+                      entity: light.taklist
+                - features:
                     - type: cover-open-close
+                  type: tile
+                  entity: cover.markise_hoyre
             - type: horizontal-stack
               cards:
                 - features:
                     - type: light-brightness
                   type: tile
-                  entity: light.color_light_1
+                  entity: light.peis_lampe
                 - type: vertical-stack
                   cards:
                     - type: tile
-                      entity: light.on_off_plug_1_2
+                      entity: switch.stue_panelovn_stue_panelovn_aktivert
                     - type: tile
-                      entity: light.dimmable_light_1
+                      entity: switch.stue_oljefyr_stue_oljefyr_aktivert
+            - type: horizontal-stack
+              cards:
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.skjenk_lampe
+                    - type: tile
+                      entity: light.sofabords
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: cover.markise_venstre
+                    - type: tile
+                      entity: light.sta_lampe
             - type: horizontal-stack
               cards:
                 - type: tile
-                  entity: light.gronn_sofalampe_gronn_sofalampe_turned_on
+                  entity: light.gronn_sofalampe_gronn_sofalampe_slatt_pa
                   state_content:
                     - state
                     - last-changed
                 - type: tile
-                  entity: light.spisebord_spisebord_turned_on
+                  entity: light.spisebord
             - type: horizontal-stack
               cards:
                 - type: tile
@@ -1241,23 +1205,30 @@ cards:
                           0%, 31.98%, 32.98%, 34.98%, 36.98%, 39.98%, 67.98%, 68.98%, 95.98%, 96.98%, 97.98%, 98.98%, 100% { opacity: 0.6; }
                           32%, 33%, 35%, 36%, 37%, 40%, 68%, 69%, 96%, 97%, 98%, 99% { opacity: 1; }
                         }
-                - type: tile
-                  entity: media_player.stua_2
-                  icon: mdi:amplifier
-                  state_content:
-                    - state
-                    - last-changed
-  - type: custom:button-card
-    template: card_title
-    name: 🔪 Kjøkken
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.stalampe_hjorne
+  - type: heading
+    icon: ""
+    heading: 🔪 Kjøkken
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: "#kjokken"
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.kjkken_multisensor_kj_kken_multisensor_temperature
+        icon: fapro:thermometer
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.kjkken_multisensor_kj_kken_multisensor_fuktighet
+        icon: fapro:humidity
+      - type: entity
+        entity: sensor.kjkken_multisensor_kj_kken_multisensor_lys
   - type: vertical-stack
     cards:
       - type: conditional
@@ -1270,10 +1241,10 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
-                - type: tile
-                  entity: climate.bad
-                  features:
+                - features:
                     - type: target-temperature
+                  type: tile
+                  entity: climate.kjokken_gulvvarme
                   card_mod:
                     style: |
                       mushroom-shape-icon {
@@ -1323,14 +1294,14 @@ cards:
                   cards:
                     - type: tile
                       entity: light.kjokken_spot
-                      features:
-                        - type: light-brightness
+                    - type: tile
+                      entity: light.kjokken_matbord
             - type: horizontal-stack
               cards:
                 - type: tile
-                  entity: light.benkbelysning_benkbelysning
+                  entity: light.benkbelysning
                 - type: tile
-                  entity: light.matbord_matbord_turned_on
+                  entity: climate.kjokken
                   state_content:
                     - state
                     - last-changed
@@ -1346,10 +1317,10 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
-                - type: tile
-                  entity: climate.bad
-                  features:
+                - features:
                     - type: target-temperature
+                  type: tile
+                  entity: climate.kjokken_gulvvarme
                   card_mod:
                     style: |
                       mushroom-shape-icon {
@@ -1404,18 +1375,18 @@ cards:
             - type: horizontal-stack
               cards:
                 - type: tile
-                  entity: switch.oslo_kjokken_ovn_socket_1
+                  entity: climate.kjokken
                 - type: tile
-                  entity: light.extended_color_light_1_2
+                  entity: light.trappeskap_lampe
                   state_content:
                     - state
                     - last-changed
             - type: horizontal-stack
               cards:
                 - type: tile
-                  entity: light.matbord_matbord_turned_on
+                  entity: light.kjokken_matbord
                 - type: tile
-                  entity: light.benkbelysning_benkbelysning
+                  entity: light.benkbelysning
                   state_content:
                     - state
                     - last-changed
@@ -1471,27 +1442,61 @@ cards:
                       }
                 - type: vertical-stack
                   cards:
+                    - type: custom:mushroom-template-card
+                      icon: mdi:washing-machine
+                      icon_color: teal
+                      primary: Vaske Maskin
+                      entity: switch.vaskemaskin_vaskemaskin_reset_power_meter
+                      tap_action:
+                        action: more-info
+                      card_mod:
+                        style: |
+                          ha-state-icon {
+                            animation: shake 400ms ease-in-out infinite, drum 2s ease infinite;
+                            transform-origin: 50% 110%;
+                          }
+                          @keyframes shake {
+                            0%, 100% { transform: translate(0, 0) rotate(0); }
+                            20%  { transform: translate(0.4px, -0.4px) rotate(-4deg); }
+                            40%  { transform: translate(-0.4px, 0.4px) rotate(4deg); }
+                            60%  { transform: translate(0.4px, 0.4px) rotate(-4deg); }
+                            80%  { transform: translate(-0.4px, -0.4px) rotate(4deg); }
+                          }
+                          @keyframes drum {
+                            50%  { clip-path: polygon(0 0, 0 100%, 35% 100%, 34% 68%, 60% 41%, 71% 56%, 65% 74%, 47% 79%, 32% 69%, 35% 100%, 100% 100%, 100% 0); }
+                          }
                     - type: tile
-                      entity: switch.vaskemaskin_vaskemaskin_turned_on
-                    - type: tile
-                      entity: switch.oppvaskmaskin_oppvaskmaskin_turned_on
-  - type: custom:button-card
-    template: card_title
-    name: 🗃️ Benk
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+                      entity: switch.oppvaskmaskin
+                      color: blue
+                      icon: mdi:dishwasher
+                      primary: Dishwasher
+                      card_mod:
+                        style: |
+                          ha-state-icon {
+                            animation: bounce 1.5s ease-in-out infinite, wash 1s ease-in-out infinite;
+                            transform-origin: 50% 75%;
+                          }
+                          @keyframes bounce {
+                            0%, 20%, 50%, 80%, 100% {transform: translateY(0); } 
+                            40% { transform: translateY(-1.2px) rotate(5deg); } 
+                            60% { transform: translateY(-1.1px) rotate(-4deg); } 
+                          } 
+                          @keyframes wash {
+                            50%  { clip-path: polygon(0 0, 0 100%, 35% 100%, 36% 74%, 31% 43%, 61% 40%, 71% 69%, 62% 78%, 36% 73%, 35% 100%, 100% 100%, 100% 0); }
+                          }
+  - type: heading
+    icon: ""
+    heading: 🗃️ Benk
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: "#benk"
   - type: vertical-stack
     cards:
       - type: horizontal-stack
         cards:
           - type: tile
-            entity: fan.stavifte_stavifte_turned_on
+            entity: fan.stavifte
             vertical: true
             state_content:
               - state
@@ -1518,49 +1523,40 @@ cards:
                   - state
                   - last-changed
               - type: tile
-                entity: switch.server_socket_1
-                state_content:
-                  - state
-                  - last-changed
+                entity: light.benklampe
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: translateY(-1.5px);
+                      transition: 0s;
+                      box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
+                    }
       - type: horizontal-stack
         cards:
           - type: tile
-            entity: light.nattbord_lampe
-            card_mod:
-              style: |
-                ha-card:active {
-                  transform: translateY(-1.5px);
-                  transition: 0s;
-                  box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
-                }
+            entity: light.sideskap
           - type: tile
-            entity: light.homey_ring
-            card_mod:
-              style: |
-                ha-card:active {
-                  transform: translateY(-1.5px);
-                  transition: 0s;
-                  box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.16);
-                }
-  - type: custom:button-card
-    template: card_title
-    name: 🚽 Bad
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
+            entity: light.overskap
+  - type: heading
+    icon: ""
+    heading: 🚽 Bad
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: ""
+    badges:
+      - type: entity
+        entity: sensor.bad_1_et_bevegelsessensor
+      - type: entity
+        entity: binary_sensor.bad_1_et_bevegelsessensor
   - type: vertical-stack
     cards:
       - type: horizontal-stack
         cards:
-          - type: tile
-            entity: climate.badgulvvarme_badgulvvarme
-            features:
+          - features:
               - type: target-temperature
+            type: tile
+            entity: climate.bad_gulvvarme
             card_mod:
               style: |
                 mushroom-shape-icon {
@@ -1609,12 +1605,12 @@ cards:
           - type: vertical-stack
             cards:
               - type: tile
-                entity: switch.hanklevarmer_hanklevarmer_turned_on
+                entity: switch.hanklevarmer
                 state_content:
                   - power
                   - last-changed
               - type: tile
-                entity: fan.baderomsvifte_baderomsvifte_turned_on
+                entity: fan.baderomsvifte
                 card_mod:
                   style: |
                     ha-state-icon {
@@ -1632,42 +1628,16 @@ cards:
       - type: horizontal-stack
         cards:
           - type: tile
-            entity: switch.creality_k1_creality_k1_turned_on
-  - type: custom:button-card
-    template: card_title
-    name: 🌳 Ute
-    styles:
-      card:
-        - margin-top: 6px
-        - margin-left: 10px
-        - margin-bottom: 0px
-        - padding: 2px
-      name:
-        - font-size: 1.3rem
-  - type: vertical-stack
-    cards:
-      - type: conditional
-        conditions:
-          - condition: state
-            entity: input_boolean.vis_alt
-            state: "off"
-        card:
-          type: vertical-stack
-          cards:
-            - type: horizontal-stack
-              cards:
-                - type: horizontal-stack
-                  cards:
-                    - type: tile
-                      entity: light.veranda_lampe_venstre
-                      state_content:
-                        - state
-                        - last-changed
-                    - type: tile
-                      entity: light.veranda_lampe_hoyre
-                      state_content:
-                        - state
-                        - last-changed
+            entity: switch.creality_k1c
+          - type: tile
+            entity: light.do_speillampe
+  - type: heading
+    icon: ""
+    heading: 🌳 Ute
+    heading_style: title
+    tap_action:
+      action: navigate
+      navigation_path: ""
   - type: vertical-stack
     cards:
       - type: conditional
@@ -1680,51 +1650,15 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
-                - type: custom:stack-in-card
-                  cards:
-                    - type: vertical-stack
-                      cards:
-                        - type: custom:mushroom-entity-card
-                          entity: switch.creality_k1_creality_k1_turned_on
-                          name: Sprinkler
-                          icon: mdi:sprinkler
-                          vertical: true
-                          card_mod:
-                            style: >
-                              {% if is_state('valve.sprinkerl_veranda_zone_1',
-                              'open') %}
-
-                              ha-state-icon {
-                                  animation: sprinkle 2s linear infinite;
-                                  transform-origin: 29% 88%; 
-                                }
-                                @keyframes sprinkle {
-                                  0%, 15%, 30%, 45%, 60%, 100% { clip-path: inset(0 55% 0 0); transform: rotate(0deg); }
-                                  1%, 16%, 31%, 46% { clip-path: inset(0 0 0 0); transform: rotate(-10deg); }
-                                  6%, 21%, 36%, 51% { transform: rotate(2deg); }
-                                }
-                              {% endif %}
-                        - type: custom:mushroom-number-card
-                          card_mod:
-                            style: |
-                              ha-card {
-                                border: 0px;
-                                box-shadow: none;
-                                }
-                          entity: input_number.verandabed_kjoretid
-                          display_mode: buttons
-                          primary_info: none
-                          secondary_info: none
-                          icon_type: none
-                - type: vertical-stack
+                - type: horizontal-stack
                   cards:
                     - type: tile
-                      entity: light.veranda_lampe_venstre
+                      entity: light.verandalampe_venstre
                       state_content:
                         - state
                         - last-changed
                     - type: tile
-                      entity: light.veranda_lampe_hoyre
+                      entity: light.verandalampe_hoyre
                       state_content:
                         - state
                         - last-changed
@@ -1796,20 +1730,1356 @@ cards:
                   style="font-size:0.5em">mm<br>' +
                   entity.attributes.precipitation_percent + '
                   %</span>'             ]]]
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_boolean.vis_alt
+            state: "off"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: custom:stack-in-card
+                  cards:
+                    - type: vertical-stack
+                      cards:
+                        - type: custom:mushroom-entity-card
+                          entity: light.veranda_lysslynge_veranda_lysslynge
+                          name: Sprinkler
+                          icon: mdi:sprinkler
+                          vertical: true
+                          card_mod:
+                            style: >
+                              {% if is_state('valve.sprinkerl_veranda_zone_1',
+                              'open') %}
+
+                              ha-state-icon {
+                                  animation: sprinkle 2s linear infinite;
+                                  transform-origin: 29% 88%; 
+                                }
+                                @keyframes sprinkle {
+                                  0%, 15%, 30%, 45%, 60%, 100% { clip-path: inset(0 55% 0 0); transform: rotate(0deg); }
+                                  1%, 16%, 31%, 46% { clip-path: inset(0 0 0 0); transform: rotate(-10deg); }
+                                  6%, 21%, 36%, 51% { transform: rotate(2deg); }
+                                }
+                              {% endif %}
+                        - type: custom:mushroom-number-card
+                          card_mod:
+                            style: |
+                              ha-card {
+                                border: 0px;
+                                box-shadow: none;
+                                }
+                          entity: input_number.verandabed_kjoretid
+                          display_mode: buttons
+                          primary_info: none
+                          secondary_info: none
+                          icon_type: none
+                - type: vertical-stack
+                  cards:
+                    - type: tile
+                      entity: light.verandalampe_venstre
+                      state_content:
+                        - state
+                        - last-changed
+                    - type: tile
+                      entity: light.verandalampe_hoyre
+                      state_content:
+                        - state
+                        - last-changed
+            - type: custom:button-card
+              entity: sensor.weather_info_tutorial
+              show_icon: false
+              show_name: false
+              label: |
+                [[[ return entity.attributes.condition ]]]
+              show_label: true
+              styles:
+                custom_fields:
+                  icon:
+                    - justify-self: end
+                    - align-self: end
+                  temp:
+                    - justify-self: start
+                    - align-self: end
+                    - font-size: 46px
+                    - font-weight: 400
+                  feellike:
+                    - justify-self: start
+                    - align-self: start
+                    - font-size: 12px
+                    - font-weight: 400
+                  wind:
+                    - justify-self: end
+                    - font-size: 24px
+                    - font-weight: 500
+                    - line-height: 18px
+                    - padding-right: 40px
+                  rain:
+                    - justify-self: start
+                    - font-size: 24px
+                    - font-weight: 500
+                    - line-height: 18px
+                    - padding-left: 40px
+                grid:
+                  - grid-template-areas: >-
+                      "icon icon temp temp" "icon icon feellike feellike" "l l l
+                      l" "wind wind rain rain"
+                  - grid-template-columns: 1fr 1fr 1fr 1fr
+                  - grid-template-rows: min-content min-content max-content max-content
+                card:
+                  - padding: 12px
+                  - background: var
+                label:
+                  - justify-self: center
+                  - font-size: 18px
+                  - font-weight: 600
+                  - margin-bottom: 30px
+                  - text-transform: capitalize
+              custom_fields:
+                icon: >
+                  [[[ return '<img src="' + entity.attributes.cond_icon + '"
+                  width="140" height="140" />' ]]]
+                temp: >
+                  [[[ return entity.attributes.temperature + '<span
+                  style="font-size:0.5em">°C</span>' ]]]
+                feellike: >
+                  [[[ return 'Feels like: ' + entity.attributes.feels_like +
+                  '°C' ]]]
+                wind: >
+                  [[[ return entity.attributes.wind_speed + ' <span
+                  style="font-size:0.5em">m/s<br>' + entity.attributes.wind_desc
+                  + ' (' + entity.attributes.wind_dir + ')</span>' ]]]
+                rain: >
+                  [[[ return entity.attributes.precipitation + '<span
+                  style="font-size:0.5em">mm<br>' +
+                  entity.attributes.precipitation_percent + '
+                  %</span>'             ]]]
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#inngang"
+        name: Inngang
+        icon: mdi:door
+        entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_temperatur
+        button_type: state
+        force_icon: false
+        card_layout: large-2-rows
+        bg_color: "#121212"
+        styles: |
+          .bubble-pop-up-container {
+            --vertical-stack-card-gap: 0px!important;
+          } #header-container > div > div {
+                
+          #header-container > button {background: none;}    
+          .icon-container {background-color:#fbf1bd!important;} 
+          .icon-container > ha-icon {color:black!important;opacity:1!important;}
+          .bubble-icon {
+            --mdc-icon-size: 24px !important;
+          }
+      - type: custom:bubble-card
+        card_type: separator
+        name: Lys
+      - type: tile
+        entity: light.inngang_bordlampe
+        features:
+          - type: light-brightness
+      - features:
+          - type: light-brightness
+        type: tile
+        entity: light.inngang_taklampe
+      - type: tile
+        entity: light.mellomgang_taklampe
+      - type: custom:bubble-card
+        card_type: separator
+        name: Sikkerhet
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: >-
+              lock.kristo_jemtland_dor_las_oslo_kristo_jemtland_dor_las_oslo_last
+            show_entity_picture: false
+            vertical: false
+          - type: tile
+            entity: alarm_control_panel.alarm
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#soverom"
+        name: Soverom
+        icon: mdi:bed-double-outline
+        entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_temperatur
+        button_type: state
+        force_icon: false
+        card_layout: large-2-rows
+        bg_color: "#121212"
+        styles: |
+          .bubble-pop-up-container {
+            --vertical-stack-card-gap: 0px!important;
+          } #header-container > div > div {
+                
+          #header-container > button {background: none;}    
+          .icon-container {background-color:#fbf1bd!important;} 
+          .icon-container > ha-icon {color:black!important;opacity:1!important;}
+          .bubble-icon {
+            --mdc-icon-size: 24px !important;
+          }
+      - type: custom:bubble-card
+        card_type: separator
+        name: Lys
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.gitarlampe
+          - type: tile
+            entity: light.joka_palme_led_strip
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.sebastian_taklampe
+          - type: tile
+            entity: light.vindulampe
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.nattlampe
+          - type: tile
+            entity: light.seng_ledstrip
+      - type: custom:bubble-card
+        card_type: separator
+        name: Klima
+      - type: horizontal-stack
+        cards:
+          - features:
+              - type: target-temperature
+            type: tile
+            entity: climate.panelovn
+          - features:
+              - type: vacuum-commands
+                commands:
+                  - start_pause
+                  - stop
+                  - clean_spot
+            type: tile
+            entity: vacuum.sir_sweeps_a_lot
+      - type: custom:bubble-card
+        card_type: separator
+        name: Sikkerhet
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: binary_sensor.vidusensor_hoyre_vidusensor_hoyre_kontaktalarm
+          - type: tile
+            entity: binary_sensor.multisensor_multisensor_motion_sensor
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: >-
+              binary_sensor.vallhorn_motion_sensor_vallhorn_motion_sensor_bevegelsesalarm
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#benk"
+        name: Benk
+        icon: mdi:desk
+        entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_temperatur
+        button_type: state
+        force_icon: false
+        card_layout: large-2-rows
+        bg_color: "#121212"
+        styles: |
+          .bubble-pop-up-container {
+            --vertical-stack-card-gap: 0px!important;
+          } #header-container > div > div {
+                
+          #header-container > button {background: none;}    
+          .icon-container {background-color:#fbf1bd!important;} 
+          .icon-container > ha-icon {color:black!important;opacity:1!important;}
+          .bubble-icon {
+            --mdc-icon-size: 24px !important;
+          }
+      - type: custom:bubble-card
+        card_type: separator
+        name: Lys
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.benkbelysning_hoyre_benkbelysning_hoyre
+          - type: tile
+            entity: light.benklampe
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.wled
+          - type: tile
+            entity: light.overskap
+      - type: custom:bubble-card
+        card_type: separator
+        name: Klima
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: fan.stavifte_stavifte_slatt_pa
+      - type: custom:bubble-card
+        card_type: separator
+        name: Sikkerhet
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: >-
+              binary_sensor.skuffesensor_venstre_skuffesensor_venstre_kontaktalarm
+          - type: tile
+            entity: binary_sensor.skuffesensor_hoyre_skuffesensor_hoyre_kontaktalarm
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#fjernkontroll"
+        name: Stue Tv
+        entity: media_player.stua_2
+        button_type: state
+      - type: custom:bubble-card
+        card_type: separator
+        name: Presets
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.select_source
+              target:
+                device_id:
+                  - 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                source: Plex
+            name: Plex
+            icon: phu:plex
+            hide_state: true
+            show_entity_picture: false
+            color: accent
+            entity: sensor.temprature_feels_like
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.select_source
+              target:
+                device_id:
+                  - 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                source: Max
+            name: Telia Play
+            icon: fas:tv
+            hide_state: true
+            show_entity_picture: false
+            color: purple
+            entity: sensor.temprature_feels_like
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.select_source
+              target:
+                device_id:
+                  - 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                source: Max
+            name: Max
+            icon: phu:max
+            hide_state: true
+            show_entity_picture: false
+            color: purple
+            entity: sensor.temprature_feels_like
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.select_source
+              target:
+                device_id:
+                  - 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                source: Youtube
+            name: YouTube
+            icon: phu:youtube
+            hide_state: true
+            show_entity_picture: false
+            color: red
+            entity: sensor.temprature_feels_like
+      - type: custom:bubble-card
+        card_type: separator
+        name: Fjernkontroll
+      - square: true
+        type: grid
+        cards:
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:home
+            color: primary
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: home
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: home
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-up
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: up
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: up
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-left-bottom
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: previous
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: previous
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:power
+            color: red
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: wakeup
+            hold_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: suspend
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: wakeup
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-left
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: left
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: left
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:circle
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: select
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: select
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-right
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: right
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: right
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:play
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: play
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: fas:backward
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: skip_backward
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-down
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: down
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: fas:forward
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: skip_forward
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:pause
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: pause
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:volume-minus
+            color: accent
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: volume_down
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:volume-plus
+            color: accent
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: volume_up
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:rewind-30
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: volume_up
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:fast-forward-30
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: volume_up
+        columns: 4
   - type: custom:button-card
     color_type: blank-card
     styles:
       card:
         - height: 150px
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#fjernkontroll_benk"
+        name: Benk Tv
+        entity: media_player.benk_tv
+        button_type: state
+        icon: fas:tv
+      - type: custom:bubble-card
+        card_type: separator
+        name: Presets
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: com.plexapp.android
+                media_content_type: app
+            icon_tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: com.plexapp.android
+                media_content_type: app
+            name: Plex
+            icon: phu:plex
+            hide_state: true
+            show_entity_picture: false
+            color: accent
+            entity: sensor.temprature_feels_like
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: com.netflix.ninja
+                media_content_type: app
+            icon_tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: com.netflix.ninja
+                media_content_type: app
+            name: Max
+            icon: phu:netflix
+            hide_state: true
+            show_entity_picture: false
+            color: red
+            entity: sensor.temprature_feels_like
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: https://www.youtube.com
+                media_content_type: app
+            icon_tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: https://www.youtube.com
+                media_content_type: app
+            name: YouTube
+            icon: phu:youtube
+            hide_state: true
+            show_entity_picture: false
+            color: red
+            entity: sensor.temprature_feels_like
+          - type: tile
+            tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: com.plexapp.android
+                media_content_type: app
+            icon_tap_action:
+              action: perform-action
+              perform_action: media_player.play_media
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                media_content_id: com.plexapp.android
+                media_content_type: app
+            name: Telia Play
+            icon: fas:tv
+            hide_state: true
+            show_entity_picture: false
+            color: purple
+            entity: sensor.temprature_feels_like
+      - type: custom:bubble-card
+        card_type: separator
+        name: Fjernkontroll
+      - square: true
+        type: grid
+        cards:
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:home
+            color: primary
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: HOME
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: HOME
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-up
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_UP
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_UP
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-left-bottom
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: BACK
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: BACK
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:power
+            color: red
+            tap_action:
+              action: perform-action
+              perform_action: remote.toggle
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.toggle
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-left
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_LEFT
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_LEFT
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:circle
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_CENTER
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_CENTER
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-right
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_RIGHT
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_RIGHT
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:play
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_PLAY
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_PLAY
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: fas:backward
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_REWIND
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_REWIND
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:arrow-down
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_DOWN
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: DPAD_DOWN
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: fas:forward
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_FAST_FORWARD
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_FAST_FORWARD
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:pause
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_PAUSE
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_PAUSE
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:volume-minus
+            color: accent
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: VOLUME_DOWN
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: VOLUME_DOWN
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:volume-plus
+            color: accent
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id:
+                  - 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: VOLUME_UP
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: VOLUME_UP
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:rewind-30
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: volume_up
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_PLAY
+          - type: tile
+            entity: sensor.hus_tempraturee
+            hide_state: true
+            vertical: true
+            layout_options:
+              grid_columns: 1
+              grid_rows: 2
+            name: " "
+            icon: mdi:fast-forward-30
+            color: cyan
+            tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 3f559fd202d31936b8c9d938d4d5dc69
+              data:
+                command: volume_up
+            icon_tap_action:
+              action: perform-action
+              perform_action: remote.send_command
+              target:
+                device_id: 600eada40cff5a30967af0547b1ddf18
+              data:
+                command: MEDIA_PLAY
+        columns: 4
+  - type: conditional
+    conditions:
+      - condition: screen
+        media_query: "(min-width: 0px) and (max-width: 767px)"
+    card:
+      type: custom:vertical-stack-in-card
+      horizontal: true
+      cards:
+        - type: custom:mushroom-template-card
+          primary: Hjem
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Server
+          icon: mdi:nas
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/homekit-server
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Energi
+          icon: mdi:lightning-bolt-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/energi
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                }
+                :host {
+                  --mush-icon-border-radius: 16px;
+                }
+        - type: custom:mushroom-template-card
+          primary: Kart
+          icon: mdi:map-outline
+          tap_action:
+            action: navigate
+            navigation_path: /ui-minimalist/map
+          layout: vertical
+          card_mod:
+            style:
+              mushroom-shape-icon$: |
+                .shape {
+                  width: 66px !important;
+                  height: 36px !important;
+                  --shape-color: none;
+                }
+              .: |
+                ha-card {    
+                  background: none;
+                  --mush-icon-border-radius: 16px;
+                }
+      card_mod:
+        style: |
+          ha-card {
+            position: fixed !important;
+            bottom: 0px ;
+            width: 100%;
+            border-radius: 0px 0px 0px 0px;
+            height: 13%;
+            left: -1px;
+            padding-bottom: 100;
+            padding-left: 10px;
+            z-index: 0; 
+              }
   - type: conditional
     conditions:
       - condition: state
-        entity: media_player.pult_2
+        entity: media_player.pult
         state: playing
     card:
       type: custom:button-card
       show_label: true
-      entity: media_player.pult_2
+      entity: media_player.pult
+      tap_action:
+        action: navigate
+        navigation_path: "#sonos"
       name: "[[[ return states[ entity.entity_id ].attributes.media_artist ]]]"
       label: "[[[ return states[ entity.entity_id ].attributes.media_title ]]]"
       show_state: false
@@ -1921,112 +3191,288 @@ cards:
         play_state: >
           [[[ return states[entity.entity_id].state + " - " +
           states[entity.entity_id].attributes.source]]]
-  - type: conditional
-    conditions:
-      - condition: screen
-        media_query: "(min-width: 0px) and (max-width: 767px)"
-    card:
-      type: custom:vertical-stack-in-card
-      horizontal: true
-      cards:
-        - type: custom:mushroom-template-card
-          primary: Hjem
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /ui-minimalist/homekit
-          layout: vertical
-          card_mod:
-            style:
-              mushroom-shape-icon$: |
-                .shape {
-                  width: 66px !important;
-                  height: 36px !important;
-                }
-              .: |
-                ha-card {    
-                  background: none;
-                }
-                :host {
-                  --mush-icon-border-radius: 16px;
-                }
-        - type: custom:mushroom-template-card
-          primary: Server
-          icon: mdi:nas
-          tap_action:
-            action: navigate
-            navigation_path: /ui-minimalist/homekit-server
-          layout: vertical
-          card_mod:
-            style:
-              mushroom-shape-icon$: |
-                .shape {
-                  width: 66px !important;
-                  height: 36px !important;
-                  --shape-color: none;
-                }
-              .: |
-                ha-card {    
-                  background: none;
-                }
-                :host {
-                  --mush-icon-border-radius: 16px;
-                }
-        - type: custom:mushroom-template-card
-          primary: Energi
-          icon: mdi:lightning-bolt-outline
-          tap_action:
-            action: navigate
-            navigation_path: /ui-minimalist/energi
-          layout: vertical
-          card_mod:
-            style:
-              mushroom-shape-icon$: |
-                .shape {
-                  width: 66px !important;
-                  height: 36px !important;
-                  --shape-color: none;
-                }
-              .: |
-                ha-card {    
-                  background: none;
-                }
-                :host {
-                  --mush-icon-border-radius: 16px;
-                }
-        - type: custom:mushroom-template-card
-          primary: Kart
-          icon: mdi:map-outline
-          tap_action:
-            action: navigate
-            navigation_path: /ui-minimalist/map
-          layout: vertical
-          card_mod:
-            style:
-              mushroom-shape-icon$: |
-                .shape {
-                  width: 66px !important;
-                  height: 36px !important;
-                  --shape-color: none;
-                }
-              .: |
-                ha-card {    
-                  background: none;
-                  --mush-icon-border-radius: 16px;
-                }
-      card_mod:
-        style: |
-          ha-card {
-            position: fixed !important;
-            bottom: 0px ;
-            width: 100%;
-            border-radius: 0px 0px 0px 0px;
-            height: 13%;
-            left: -1px;
-            padding-bottom: 100;
-            padding-left: 10px;
-            z-index: 0; 
-              }
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#sonos"
+        name: Sonos
+        entity: media_player.pult_2
+        button_type: state
+        icon: phu:sonos-one
+        show_icon: true
+        show_name: true
+        show_state: true
+        scrolling_effect: true
+        force_icon: true
+        show_attribute: false
+        show_last_changed: true
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions: []
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:button-card
+                  entity: media_player.pult
+                  show_icon: false
+                  show_name: false
+                  show_entity_picture: true
+                  styles:
+                    card:
+                      - padding: 0
+                    entity_picture:
+                      - width: 100%
+                      - height: auto
+                - type: custom:button-card
+                  entity: media_player.pult
+                  show_icon: false
+                  show_name: true
+                  styles:
+                    card:
+                      - background: none
+                      - padding: 40px 0 10px 0
+                    name:
+                      - font-size: 20px
+                  name: >
+                    [[[ return entity.attributes.media_title + '<br><span
+                    style="font-size: 0.6em">' + entity.attributes.media_artist
+                    ]]]
+                - type: custom:my-slider-v2
+                  entity: media_player.pult
+                  mode: volume
+                  allowTapping: true
+                  allowSliding: true
+                  styles:
+                    container:
+                      - overflow: visible
+                    card:
+                      - height: 8px
+                      - background: "#494949"
+                    progress:
+                      - background: >-
+                          linear-gradient(145deg, rgba(255,200,138,1) 0%,
+                          rgba(238,149,255,1) 100%)
+                      - border-radius: 4px
+                    track:
+                      - background: none
+                    thumb:
+                      - width: 18px
+                      - height: 18px
+                      - background: white
+                      - border-radius: 50%
+                      - top: "-5px"
+                - type: conditional
+                  conditions:
+                    - condition: state
+                      entity: media_player.pult
+                      state: playing
+                  card:
+                    type: custom:paper-buttons-row
+                    styles:
+                      background: null
+                      flex-wrap: nowrap
+                      justify-content: center
+                      padding: 20px 0px
+                    buttons:
+                      - icon: mdi:repeat
+                        tap_action:
+                          action: call-service
+                          service: script.repeat_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                      - icon: mdi:skip-backward
+                        tap_action:
+                          action: call-service
+                          service: script.previous_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                      - icon: mdi:pause
+                        tap_action:
+                          action: call-service
+                          service: script.play_sonos
+                        styles:
+                          button:
+                            background: >-
+                              linear-gradient(145deg, rgba(255,200,138,1) 0%,
+                              rgba(238,149,255,1) 100%)
+                            width: 80px
+                            height: 80px
+                            flex-shrink: 0
+                            border-radius: 50%
+                          icon:
+                            color: black
+                      - icon: mdi:skip-forward
+                        tap_action:
+                          action: call-service
+                          service: script.next_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                      - icon: mdi:shuffle-variant
+                        tap_action:
+                          action: call-service
+                          service: script.shuffle_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                - type: conditional
+                  conditions:
+                    - condition: state
+                      entity: media_player.pult
+                      state: paused
+                  card:
+                    type: custom:paper-buttons-row
+                    styles:
+                      background: null
+                      flex-wrap: nowrap
+                      justify-content: center
+                      padding: 20px 0px
+                    buttons:
+                      - icon: mdi:repeat
+                        tap_action:
+                          action: call-service
+                          service: script.repeat_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                      - icon: mdi:skip-backward
+                        tap_action:
+                          action: call-service
+                          service: script.previous_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                      - icon: mdi:play
+                        tap_action:
+                          action: call-service
+                          service: script.play_sonos
+                        styles:
+                          button:
+                            background: >-
+                              linear-gradient(145deg, rgba(255,200,138,1) 0%,
+                              rgba(238,149,255,1) 100%)
+                            width: 80px
+                            height: 80px
+                            flex-shrink: 0
+                            border-radius: 50%
+                          icon:
+                            color: black
+                      - icon: mdi:skip-forward
+                        tap_action:
+                          action: call-service
+                          service: script.next_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+                      - icon: mdi:shuffle-variant
+                        tap_action:
+                          action: call-service
+                          service: script.shuffle_sonos
+                        styles:
+                          button:
+                            background: none
+                            width: 40px
+                            height: 40px
+                            flex-shrink: 0
+                          icon:
+                            color: white
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#kjokken"
+        name: Kjøkken
+        icon: mdi:knife
+        entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_temperatur
+        button_type: state
+        force_icon: false
+        card_layout: large-2-rows
+        bg_color: "#121212"
+        styles: |
+          .bubble-pop-up-container {
+            --vertical-stack-card-gap: 0px!important;
+          } #header-container > div > div {
+                
+          #header-container > button {background: none;}    
+          .icon-container {background-color:#fbf1bd!important;} 
+          .icon-container > ha-icon {color:black!important;opacity:1!important;}
+          .bubble-icon {
+            --mdc-icon-size: 24px !important;
+          }
+      - type: custom:bubble-card
+        card_type: separator
+        name: Lys
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.kjokken_benkbelysning_kjokken_benkbelysning
+          - type: tile
+            entity: light.kjokken_spot
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: light.kjokken_matbord
+          - type: tile
+            entity: light.trappeskap_lampe
+      - type: custom:bubble-card
+        card_type: separator
+        name: Klima
+      - type: horizontal-stack
+        cards:
+          - features:
+              - type: target-temperature
+            type: tile
+            entity: climate.kjokken_gulvvarme
+          - features:
+              - type: target-temperature
+            type: tile
+            entity: climate.kjokken
 icon: mdi:home
-theme: minimalist-mobile
 type: custom:vertical-layout
+theme: minimalist-mobile
+background:
+  opacity: 100
+  alignment: center
+  size: cover
+  repeat: no-repeat
+  attachment: fixed
+  image: /api/image/serve/4e72090aee9bf7738a79adc5c9cbd5d2/original
