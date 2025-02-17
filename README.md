@@ -20,7 +20,7 @@ Hacs:
 # What is HaHome?
 HaHome is a dashboard design for HomeAssistant, inspired by HomeKit and Google Home. It was created by Sebastian K.J.
 
-![Alt text](/Pictures/IMG_20250217_203705-left.jpeg)
+![Alt text](/Pictures/IMG_20250217_203705-left.png)
 ![Alt text](/Pictures/IMG_0274-left.png)
 ![Alt text](/Pictures/IMG_0281-left.png)
 ![Alt text](/Pictures/IMG_0282-left.png)
