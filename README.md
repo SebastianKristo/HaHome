@@ -16,6 +16,7 @@ Hacs:
 - https://github.com/kalkih/mini-graph-card
 - https://github.com/dylandoamaral/uptime-card
 - https://github.com/RomRider/apexcharts-card
+- https://github.com/thomasloven/lovelace-layout-card
 
 # What is HaHome?
 HaHome is a dashboard design for HomeAssistant, inspired by HomeKit and Google Home. It was created by Sebastian K.J.
