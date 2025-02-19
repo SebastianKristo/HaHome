@@ -2983,6 +2983,7 @@ cards:
                 .shape {
                   width: 66px !important;
                   height: 36px !important;
+
                 }
               .: |
                 ha-card {    
@@ -3475,4 +3476,3 @@ background:
   size: cover
   repeat: no-repeat
   attachment: fixed
-  image: /api/image/serve/4e72090aee9bf7738a79adc5c9cbd5d2/original
