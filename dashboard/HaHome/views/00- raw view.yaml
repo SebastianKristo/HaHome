@@ -2997,9 +2997,12 @@ views:
                     command: MEDIA_PLAY
             columns: 4
       - type: conditional
-        conditions: []
+        conditions:
+          - condition: screen
+            media_query: '(min-width: 0px) and (max-width: 767px)'
         card:
           type: custom:vertical-stack-in-card
+          horizontal: true
           cards:
             - type: custom:mushroom-template-card
               primary: Hjem
@@ -3014,6 +3017,7 @@ views:
                     .shape {
                       width: 66px !important;
                       height: 36px !important;
+
                     }
                   .: |
                     ha-card {    
@@ -3510,7 +3514,6 @@ views:
       size: cover
       repeat: no-repeat
       attachment: fixed
-      image: /api/image/serve/4e72090aee9bf7738a79adc5c9cbd5d2/original
   - title: Server
     path: homekit-server
     cards:
@@ -8902,6 +8905,708 @@ views:
                       data:
                         command: volume_up
                 columns: 4
+  - type: custom:vertical-layout
+    path: home
+    title: Home
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            tap_action:
+              action: navigate
+              navigation_path: /config
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '1' ]]]
+                styles:
+                  card:
+                    - background: transparent
+            styles:
+              card:
+                - width: 34px
+                - height: 34px
+              img_cell:
+                - width: 30px
+                - height: 30px
+              icon:
+                - width: 22px
+                - padding-left: null
+                - padding-right: null
+                - padding-top: 2px
+                - padding-bottom: null
+            icon: mdi:menu
+            entity: sensor.hus_temperature
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: spacer
+          - type: custom:button-card
+            tap_action:
+              action: navigate
+              navigation_path: /config
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '1' ]]]
+                styles:
+                  card:
+                    - background: transparent
+            styles:
+              card:
+                - width: 34px
+                - height: 34px
+              img_cell:
+                - width: 30px
+                - height: 30px
+              icon:
+                - width: 22px
+                - padding-left: null
+                - padding-right: null
+                - padding-top: 2px
+                - padding-bottom: null
+            icon: mdi:plus
+            entity: sensor.hus_temperature
+          - type: custom:button-card
+            tap_action:
+              action: assist
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '1' ]]]
+                styles:
+                  card:
+                    - background: transparent
+            styles:
+              card:
+                - width: 34px
+                - height: 34px
+              img_cell:
+                - width: 30px
+                - height: 30px
+              icon:
+                - width: 22px
+                - padding-left: null
+                - padding-right: null
+                - padding-top: 2px
+                - padding-bottom: null
+            icon: mdi:message-processing-outline
+            entity: sensor.hus_temperature
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '0' ]]]
+                styles:
+                  card:
+                    - background: transparent
+            styles:
+              card:
+                - width: 34px
+                - height: 34px
+              img_cell:
+                - width: 30px
+                - height: 30px
+              icon:
+                - width: 22px
+                - padding-left: null
+                - padding-right: null
+                - padding-top: 2px
+                - padding-bottom: null
+            icon: mdi:dots-vertical
+            entity: input_boolean.kiosk_mode
+      - type: custom:button-card
+        tap_action:
+          action: none
+        show_icon: false
+        show_label: true
+        show_name: true
+        styles:
+          card:
+            - background-color: rgba(0,0,0,0)
+            - box-shadow: none
+            - height: auto
+            - width: auto
+            - margin-top: 6px
+            - margin-left: 6px
+            - margin-bottom: 0px
+            - padding: 2px
+          grid:
+            - grid-template-areas: '''n'' ''l'''
+            - grid-template-columns: 1fr
+            - grid-template-rows: min-content min-content
+          name:
+            - justify-self: start
+            - font-weight: 400
+            - font-size: 2.5rem
+          label:
+            - justify-self: start
+            - font-weight: bold
+            - font-size: 1rem
+            - opacity: '0.4'
+        name: |
+          [[[ 
+            return (entity.state)  
+          ]]]
+        entity: sensor.greeting
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '1' ]]]
+                styles:
+                  card:
+                    - background: null
+            styles:
+              grid:
+                - grid-template-columns: 40px 1fr
+                - grid-template-rows: min-content min-content
+                - grid-template-areas: '"i n" "i l"'
+              card:
+                - padding: 4px
+                - margin-left: 1px
+              img_cell:
+                - justify-self: start
+                - width: 30px
+                - height: 30px
+                - margin-left: '-3px'
+              icon:
+                - width: 22px
+                - color: '#FF9843'
+              name:
+                - justify-self: start
+                - font-size: 14px
+                - opacity: '0.7'
+                - font-weight: 500
+                - padding: 2px 0
+              label:
+                - justify-self: start
+                - font-size: 16px
+                - padding: 2px 0
+            name: Climate
+            entity: sensor.hus_temperature
+            icon: mdi:thermometer
+            tap_action:
+              action: navigate
+              navigation_path: /ui-minimalist/homekit-klima
+            label: |
+              [[[ 
+                return (entity.state)  + '°C' 
+              ]]]
+            show_label: true
+          - type: custom:button-card
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '1' ]]]
+                styles:
+                  card:
+                    - background: null
+            styles:
+              grid:
+                - grid-template-columns: 40px 1fr
+                - grid-template-rows: min-content min-content
+                - grid-template-areas: '"i n" "i l"'
+              card:
+                - padding: 4px
+                - margin-left: 1px
+              img_cell:
+                - justify-self: start
+                - width: 30px
+                - height: 30px
+                - margin-left: '-3px'
+              icon:
+                - width: 22px
+                - color: '#FFDD95'
+              name:
+                - justify-self: start
+                - font-size: 14px
+                - font-weight: 500
+                - opacity: '0.7'
+                - padding: 2px 0
+              label:
+                - justify-self: start
+                - font-size: 16px
+                - padding: 2px 0
+            name: Lights
+            entity: sensor.current_lights_on
+            icon: mdi:lightbulb
+            tap_action:
+              action: navigate
+              navigation_path: /ui-minimalist/homekit-lys
+            label: |
+              [[[ 
+                return (entity.state)  + ' på' 
+              ]]]
+            show_label: true
+          - type: custom:button-card
+            state:
+              - operator: template
+                value: |
+                  [[[ return entity.state > '1' ]]]
+                styles:
+                  card:
+                    - background: null
+            styles:
+              grid:
+                - grid-template-columns: 40px 1fr
+                - grid-template-rows: min-content min-content
+                - grid-template-areas: '"i n" "i l"'
+              card:
+                - padding: 4px
+                - margin-left: 1px
+              img_cell:
+                - justify-self: start
+                - width: 30px
+                - height: 30px
+                - margin-left: '-3px'
+              icon:
+                - width: 22px
+                - color: '#D24545'
+              name:
+                - justify-self: start
+                - font-size: 14px
+                - font-weight: 500
+                - opacity: '0.7'
+                - padding: 2px 0
+              label:
+                - justify-self: start
+                - font-size: 16px
+                - padding: 2px 0
+            name: Sikkerhet
+            entity: >-
+              lock.kristo_jemtland_dor_las_oslo_kristo_jemtland_dor_las_oslo_last
+            icon: mdi:lock
+            tap_action:
+              action: navigate
+              navigation_path: /ui-minimalist/homekit-sikkerhet
+            label: |
+              [[[ 
+                return (entity.state) 
+              ]]]
+            show_label: true
+      - type: heading
+        icon: ''
+        heading: 📽️ Kamera
+        heading_style: title
+        tap_action:
+          action: navigate
+          navigation_path: ''
+      - type: custom:swipe-card
+        cards:
+          - type: custom:vertical-stack-in-card
+            horizontal: true
+            cards:
+              - type: custom:vertical-stack-in-card
+                horizontal: false
+                cards:
+                  - show_state: false
+                    show_name: false
+                    camera_view: auto
+                    type: picture-entity
+                    image: https://demo.home-assistant.io/stub_config/bedroom.png
+                    entity: camera.g4_doorbell_pro_high_resolution_channel
+                    aspect_ratio: '9:10'
+              - type: custom:vertical-stack-in-card
+                horizontal: false
+                cards:
+                  - show_state: false
+                    show_name: false
+                    camera_view: auto
+                    type: picture-entity
+                    image: https://demo.home-assistant.io/stub_config/bedroom.png
+                    entity: camera.veranda_g3_bullet_high_resolution_channel
+                  - show_state: false
+                    show_name: false
+                    camera_view: auto
+                    type: picture-entity
+                    image: https://demo.home-assistant.io/stub_config/bedroom.png
+                    entity: camera.server_g3_flex_high_resolution_channel
+          - type: custom:vertical-stack-in-card
+            horizontal: true
+            cards:
+              - type: custom:vertical-stack-in-card
+                horizontal: false
+                cards:
+                  - show_state: false
+                    show_name: false
+                    camera_view: auto
+                    type: picture-entity
+                    image: https://demo.home-assistant.io/stub_config/bedroom.png
+                    entity: camera.g3_flex_high_resolution_channel
+                    aspect_ratio: '9:10'
+              - show_state: false
+                show_name: false
+                camera_view: auto
+                type: picture-entity
+                image: https://demo.home-assistant.io/stub_config/bedroom.png
+                entity: camera.bedroom
+      - type: heading
+        icon: ''
+        heading: 🚪 Inngang
+        heading_style: title
+        tap_action:
+          action: navigate
+          navigation_path: '#inngang'
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_temperatur
+            icon: ''
+            state_content: state
+            color: state
+          - type: entity
+            entity: sensor.inngang_temp_og_fukt_inngang_temp_og_fukt_luftfuktighet
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - features:
+                  - type: lock-commands
+                type: tile
+                entity: >-
+                  lock.kristo_jemtland_dor_las_oslo_kristo_jemtland_dor_las_oslo_last
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+              - type: vertical-stack
+                cards:
+                  - type: tile
+                    entity: input_boolean.vis_alt
+                    card_mod:
+                      style: |
+                        ha-card:active {
+                          transform: scale(0.975);
+                          transition: 0s;
+                        }
+                  - type: tile
+                    entity: input_select.theme
+                    card_mod:
+                      style: |
+                        ha-card:active {
+                          transform: scale(0.975);
+                          transition: 0s;
+                        }
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: light.inngang_taklampe
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+              - type: tile
+                entity: light.inngang_bordlampe
+                vertical: false
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: light.mellomgang_taklampe
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+              - type: tile
+                entity: light.trappelys
+                vertical: false
+                card_mod:
+                  style: |
+                    ha-card:active {
+                      transform: scale(0.975);
+                      transition: 0s;
+                    }
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: input_boolean.vis_alt
+                state: 'on'
+            card:
+              type: horizontal-stack
+              cards:
+                - type: tile
+                  entity: calendar.fodselsdager
+                  card_mod:
+                    style: |
+                      ha-state-icon {
+                          animation: door 3s steps(1) infinite alternate; 
+                        }
+                        @keyframes door {
+                          0% { clip-path: inset(0 0 0 0); }
+                          25%  { clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 100%, 69% 73%, 32% 73%, 31% 100%, 0 100%); }
+                          50%  { clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 100%, 69% 61%, 32% 61%, 31% 100%, 0 100%); }
+                          75% { clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 100%, 69% 48%, 32% 48%, 31% 100%, 0 100%); }
+                        }
+                - type: tile
+                  entity: alarm_control_panel.alarm
+                  icon: mdi:dialpad
+                  card_mod:
+                    style: |
+                      ha-state-icon {
+                        animation: pin 4s infinite;
+                        transform-origin: 50% 75%;
+                      }
+                      @keyframes pin {
+                        0%, 15%, 25%, 35%, 45%, 55% { clip-path: inset(0 0 0 0); }
+                        10% { clip-path: polygon(0% 100%, 1% 23%, 36% 23%, 36% 0%, 100% 0, 100% 100%); } 
+                        20% { clip-path: polygon(0% 100%, 0 0, 62% 0, 61% 25%, 100% 24%, 100% 100%); } 
+                        30% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 25%, 36% 25%, 37% 50%, 63% 49%, 62% 26%, 0 25%); } 
+                        40% { clip-path: polygon(0 51%, 0 0, 100% 0, 100% 100%, 36% 100%, 37% 51%); } 
+                        50% { clip-path: polygon(0 100%, 0 0, 100% 0, 100% 50%, 64% 50%, 64% 100%); } 
+                      } 
+                      .shape {
+                        --shape-animation: ping 4s infinite;
+                      }
+                      @keyframes ping {
+                        55% { box-shadow: 0 0 1px 0px rgba(var(--rgb-blue), 0.3) inset; }
+                        100% { box-shadow: 0 0 5px 15px transparent inset; }
+                      }
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: media_player.pult
+            state: playing
+        card:
+          type: custom:button-card
+          show_label: true
+          entity: media_player.pult
+          tap_action:
+            action: navigate
+            navigation_path: '#sonos'
+          name: '[[[ return states[ entity.entity_id ].attributes.media_artist ]]]'
+          label: '[[[ return states[ entity.entity_id ].attributes.media_title ]]]'
+          show_state: false
+          show_entity_picture: true
+          styles:
+            grid:
+              - grid-template-areas: |
+                  "i play_state button"
+                  "i l button"
+                  "i n button"
+                  "bar bar bar"
+              - grid-template-columns: min-content
+              - grid-template-rows: min-content min-content min-content
+              - column-gap: 15px
+            icon:
+              - width: 60px
+            card:
+              - padding: 10px
+              - height: 80px
+              - width: 94%
+              - overflow: hidden
+              - position: fixed
+              - bottom: 115px
+              - z-index: 4
+              - border-radius: 25px 25px 25px 25px
+              - box-shadow: >-
+                  rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32)
+                  0px 2px 16px 0px;
+            img_cell:
+              - background: var(--color-dark-gray)
+              - border-radius: 15px
+              - width: 50px
+              - height: 50px
+              - justify-self: start
+              - align-self: start
+              - left: 10px
+              - top: 4px
+            state:
+              - font-size: 10px
+              - justify-self: start
+              - align-self: start
+              - color: var(--color-dark-gray)
+              - padding-left: 25px
+              - font-family: montserrat
+            name:
+              - font-size: 11px
+              - justify-self: start
+              - align-self: start
+              - padding-left: 15px
+              - font-family: montserrat
+              - animation: my-animation 15s linear infinite
+            label:
+              - justify-self: start
+              - align-self: end
+              - font-weight: 700
+              - padding-left: 15px
+              - font-family: montserrat
+              - font-size: 13px
+            custom_fields:
+              button:
+                - justify-self: end
+                - align-self: center
+                - padding-right: 20px
+                - padding-top: 7px
+              play_state:
+                - padding-top: 5px
+                - font-size: 10px
+                - justify-self: start
+                - align-self: start
+                - color: var(--color-dark-gray)
+                - padding-left: 15px
+                - font-family: montserrat
+              bar:
+                - justify-self: start
+                - align-self: start
+                - width: 86%
+                - height: 2px
+                - background: '#cccccc'
+                - margin-left: 25px
+                - margin-top: 10px
+          custom_fields:
+            button:
+              card:
+                type: custom:button-card
+                icon: mdi:play
+                entity: '[[[ return entity.entity_id ]]]'
+                show_name: false
+                tap_action:
+                  action: call-service
+                  service: media_player.media_play_pause
+                  target:
+                    entity_id: '[[[ return entity.entity_id ]]]'
+                styles:
+                  card:
+                    - overflow: null
+                    - background: '#131314'
+                    - border-radius: 15px
+                    - left: 12px
+                  icon:
+                    - width: 20px
+                    - color: white
+                  img_cell:
+                    - padding: 11px
+                    - width: 29px
+                    - height: 26px
+                state:
+                  - value: playing
+                    icon: mdi:pause
+            play_state: >
+              [[[ return states[entity.entity_id].state + " - " +
+              states[entity.entity_id].attributes.source]]]
+      - type: conditional
+        conditions:
+          - condition: screen
+            media_query: '(min-width: 0px) and (max-width: 767px)'
+        card:
+          type: custom:vertical-stack-in-card
+          horizontal: true
+          cards:
+            - type: custom:mushroom-template-card
+              primary: Hjem
+              icon: mdi:home
+              tap_action:
+                action: navigate
+                navigation_path: /ui-minimalist/homekit
+              layout: vertical
+              card_mod:
+                style:
+                  mushroom-shape-icon$: |
+                    .shape {
+                      width: 66px !important;
+                      height: 36px !important;
+
+                    }
+                  .: |
+                    ha-card {    
+                      background: none;
+                    }
+                    :host {
+                      --mush-icon-border-radius: 16px;
+                    }
+            - type: custom:mushroom-template-card
+              primary: Server
+              icon: mdi:nas
+              tap_action:
+                action: navigate
+                navigation_path: /ui-minimalist/homekit-server
+              layout: vertical
+              card_mod:
+                style:
+                  mushroom-shape-icon$: |
+                    .shape {
+                      width: 66px !important;
+                      height: 36px !important;
+                      --shape-color: none;
+                    }
+                  .: |
+                    ha-card {    
+                      background: none;
+                    }
+                    :host {
+                      --mush-icon-border-radius: 16px;
+                    }
+            - type: custom:mushroom-template-card
+              primary: Energi
+              icon: mdi:lightning-bolt-outline
+              tap_action:
+                action: navigate
+                navigation_path: /ui-minimalist/energi
+              layout: vertical
+              card_mod:
+                style:
+                  mushroom-shape-icon$: |
+                    .shape {
+                      width: 66px !important;
+                      height: 36px !important;
+                      --shape-color: none;
+                    }
+                  .: |
+                    ha-card {    
+                      background: none;
+                    }
+                    :host {
+                      --mush-icon-border-radius: 16px;
+                    }
+            - type: custom:mushroom-template-card
+              primary: Kart
+              icon: mdi:map-outline
+              tap_action:
+                action: navigate
+                navigation_path: /ui-minimalist/map
+              layout: vertical
+              card_mod:
+                style:
+                  mushroom-shape-icon$: |
+                    .shape {
+                      width: 66px !important;
+                      height: 36px !important;
+                      --shape-color: none;
+                    }
+                  .: |
+                    ha-card {    
+                      background: none;
+                      --mush-icon-border-radius: 16px;
+                    }
+          card_mod:
+            style: |
+              ha-card {
+                position: fixed !important;
+                bottom: 0px !important;
+                width: 100%;
+                border-radius: 0px 0px 0px 0px;
+                height: 13%;
+                left: -1px;
+                padding-bottom: 100;
+                padding-left: 10px;
+                z-index: 0; 
+                  }
 decluttering_templates:
   light_slider:
     card:
