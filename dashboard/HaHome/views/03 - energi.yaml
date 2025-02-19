@@ -28,7 +28,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:menu
-        entity: sensor.pc_soverom_temperature
+        entity: sensor.hus_temperature
       - type: custom:mushroom-chips-card
         chips:
           - type: spacer
@@ -56,7 +56,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:microphone
-        entity: sensor.pc_soverom_temperature
+        entity: sensor.hus_temperature
       - type: custom:button-card
         tap_action:
           action: navigate
@@ -82,7 +82,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:plus
-        entity: sensor.pc_soverom_temperature
+        entity: sensor.hus_temperature
       - type: custom:button-card
         tap_action:
           action: toggle
@@ -107,7 +107,7 @@ cards:
             - padding-top: 2px
             - padding-bottom: null
         icon: mdi:dots-vertical
-        entity: input_boolean.themes_homekit
+        entity: input_boolean.kiosk_mode
   - type: custom:button-card
     tap_action:
       action: navigate
@@ -142,48 +142,76 @@ cards:
     label: null
   - type: custom:vertical-stack-in-card
     cards:
-      - type: custom:apexcharts-card
-        graph_span: 6h
-        header:
-          show: true
-          title: Energi forbruk
-          show_states: true
-          colorize_states: true
-        series:
-          - entity: sensor.strommaler_strommaler_power
-            type: column
-            name: Oslo Strømforbruk
-            group_by:
-              func: avg
-              duration: 30min
-      - type: custom:vertical-stack-in-card
-        horizontal: true
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: tile
-                entity: sensor.todays_energy_cost
-                icon: mdi:currency-usd
-                color: green
-              - type: tile
-                entity: sensor.nordpool_kwh_oslo_nok_3_10_025
-                icon: mdi:cash
-                color: teal
-      - title: Energy distribution today
-        type: energy-distribution
-        link_dashboard: true
-      - type: entities
-        entities:
-          - entity: sensor.vaskemaskin_vaskemaskin_energy
-            secondary_info: none
-          - entity: sensor.hanklevarmer_hanklevarmer_energy
-          - entity: sensor.peis_lampe_energy
-          - entity: sensor.pultlampe_energy
-          - entity: sensor.pultskjermer_energy
-          - entity: sensor.badgulvvarme_badgulvvarme_energy
-          - entity: sensor.panelovn_panelovn_energy
-        title: Enheter
-        show_header_toggle: false
+      - type: energy-date-selection
+        card_mod:
+          style: >
+            ha-card {background: none;}
+
+            ha-card > div > hui-energy-period-selector $ div > .label
+            {font-size:10px!important }
+
+            }
+      - type: energy-usage-graph
+        card_mod:
+          style: |
+            ha-card {background: var(--popupBG);}
+            }
+      - type: energy-sources-table
+        card_mod:
+          style: >
+            ha-card {
+              background: var(--popupBG)!important;
+            }
+
+            .mdc-data-table {
+              background: var(--popupBG)!important;
+            }
+
+            .mdc-data-table__row {height: 32px!important;}
+            .mdc-data-table__table-container {padding-bottom:
+            12px!important;}            
+
+            .mdc-data-table__table {
+              white-space: unset!important;
+            }
+
+            .mdc-data-table__cell, .mdc-data-table__header-cell {border:
+            none!important;}
+
+            .mdc-data-table .mdc-data-table__header-cell
+            {background:var(--popupBG)!important;border-bottom:1px solid
+            var(--popupBG)!important}
+
+            .bullet {width: 16px!important;border-radius:
+            24px!important;border-width: 0!important;}
+      - type: energy-devices-graph
+        card_mod:
+          style: >
+            ha-card {
+              background: var(--popupBG)!important;
+            }
+
+            .mdc-data-table {
+              background: var(--popupBG)!important;
+            }
+
+            .mdc-data-table__row {height: 32px!important;}
+            .mdc-data-table__table-container {padding-bottom:
+            12px!important;}            
+
+            .mdc-data-table__table {
+              white-space: unset!important;
+            }
+
+            .mdc-data-table__cell, .mdc-data-table__header-cell {border:
+            none!important;}
+
+            .mdc-data-table .mdc-data-table__header-cell
+            {background:var(--popupBG)!important;border-bottom:1px solid
+            var(--popupBG)!important}
+
+            .bullet {width: 16px!important;border-radius:
+            24px!important;border-width: 0!important;}
   - type: custom:button-card
     color_type: blank-card
     styles:
@@ -192,12 +220,12 @@ cards:
   - type: conditional
     conditions:
       - condition: state
-        entity: media_player.pult_2
+        entity: media_player.pult
         state: playing
     card:
       type: custom:button-card
       show_label: true
-      entity: media_player.pult_2
+      entity: media_player.pult
       name: "[[[ return states[ entity.entity_id ].attributes.media_artist ]]]"
       label: "[[[ return states[ entity.entity_id ].attributes.media_title ]]]"
       show_state: false
@@ -418,3 +446,10 @@ cards:
               }
 icon: mdi:lightning-bolt-outline
 type: custom:vertical-layout
+background:
+  opacity: 100
+  alignment: center
+  size: cover
+  repeat: repeat
+  attachment: fixed
+theme: minimalist-mobile
